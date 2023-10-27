@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    background-image: url(../static/Images/parl.jpg);
+    background-size: 100%;
+}
+
+/* Navigation bar styles */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px; 
+  background: darkslategrey;
+}
+
+#navbar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#navbar li {
+  list-style: none;
+  margin: 0 10px;
+}
+
+#navbar li a {
+  color: #ffff;
+  text-decoration: none;
+  font-size: 24px;
+  text-align: center;
+}
+
+#navbar li::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.25s;
+}
+
+#navbar li:hover::after {
+  width: 100%;
+}
+/* Main content styles */
+.content {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+.login-box {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #1e87d4;
+}
+
+
+.card {
+  width: 200px;
+  height: 230px;
+  display: inline-block;
+  border-radius: 10px;
+  padding: 15px 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin: 10px 15px;
+  background-position: center;
+  background-size: cover;
+  transition: transform 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+  opacity: 1;
+}
+
+.card-image {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+
+.card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  z-index: 1;
+  opacity: 1
+}
+
+.card-text{
+  opacity: 1;
+}
+
+.cardTest {
+  width: 100%;
+  height: 330px;
+  display: inline-block;
+  border-radius: 10px;
+  padding: 15px 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin: 30px auto 10px auto;
+  background-position: center;
+  background-size: cover;
+  transition: transform 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-image: url(../static/parl.jpg);
+
+}
+
+.cardTest::after{
+  content: '';
+  width: 0%;
+  height: 4px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.25s;
+}
+
+.cardTest:hover::after {
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card1 {
+  background-image: url(../static/Images/joe.jpg);
+}
+
+.card2 {
+  background-image: url(../static/Images/donald.jpg);
+}
+
+.card3 {
+  background-image: url(../static/Images/boris.jpg);
+}
+
+.card4 {
+  background-image: url(../static/Images/rishi.jpg);
+}
+
+
+.card h3 {
+  color: yellow;
+}
+
+.card2 h3 {
+  color: #d78cff;
+}
+
+.card3 h3 {
+  color: yellow;
+}
+
+.card4 h3 {
+  color: #d78cff;
+
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
