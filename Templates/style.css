@@ -149,7 +149,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background-image: url(../images/parl.jpg);
+  background-image: url(../static/parl.jpg);
 
 }
 
@@ -172,19 +172,19 @@ p {
 }
 
 .card1 {
-  background-image: url(images/joe.jpg);
+  background-image: url(../static/joe.jpg);
 }
 
 .card2 {
-  background-image: url(images/donald.jpg);
+  background-image: url(../static/donald.jpg);
 }
 
 .card3 {
-  background-image: url(images/boris.jpg);
+  background-image: url(../static/boris.jpg);
 }
 
 .card4 {
-  background-image: url(images/rishi.jpg);
+  background-image: url(../static/rishi.jpg);
 }
 
 

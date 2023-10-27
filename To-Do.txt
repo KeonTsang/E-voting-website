@@ -1,0 +1,2 @@
+Login and register page both working with flask and database
+Live graphs??
