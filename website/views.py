@@ -8,31 +8,31 @@ views = Blueprint('views', __name__)
 def home():
     return render_template("Proto1.html")
 
-@views.route("/about")
+@views.route("/about.html")
 def about():
     return render_template("about.html")
 
-@views.route("/candidates")
+@views.route("/candidates.html")
 def candidates():
     return render_template("candidates.html")
 
-@views.route("/contact")
+@views.route("/contact.html")
 def contact():
     return render_template("contact.html")
 
-@views.route("/login")
+@views.route("/login.html")
 def login():
     return render_template("login.html")
 
-@views.route("/register")
+@views.route("/register.html")
 def register():
     return render_template("register.html")
 
-@views.route("/results")
+@views.route("/results.html")
 def results():
     return render_template("results.html")
 
-@views.route("/vote")
+@views.route("/vote.html")
 def vote():
     return render_template("vote.html")
 
