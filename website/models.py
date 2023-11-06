@@ -1,4 +1,4 @@
-from main import db
+from website.__init__ import db
 
 class Voter(db.Model):
     __tablename__ = 'Voter'
