@@ -5,9 +5,10 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    background-image: url(../static/Images/parl.jpg);
+    background-color: white;
     background-size: 100%;
+    align-items: center;
+
 }
 
 /* Navigation bar styles */
@@ -15,7 +16,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 50px; 
+  padding: 20px 50px;
   background: darkslategrey;
 }
 
@@ -37,7 +38,7 @@ body {
   margin: 0 10px;
 }
 
-#navbar-right li 
+#navbar-right li
 {
   list-style:none;
   margin: 0 10px;
@@ -50,13 +51,13 @@ body {
   text-align: center;
 }
 
-#navbar-right li a 
+#navbar-right li a
 {
   color:#ffff;
   text-decoration: none;
   font-size: 24px;
   text-align: right;
-} 
+}
 
 #navbar li::after {
   content: '';
@@ -68,7 +69,7 @@ body {
   transition: 0.25s;
 }
 
-#navbar-right li::after 
+#navbar-right li::after
 {
   content: '';
   width: 0%;
@@ -99,9 +100,10 @@ body {
 }
 
 h1 {
-    font-size: 36px;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 400%;
+    color: white;
+    text-align: center;
+    margin-top: 120px;
 }
 
 p {
@@ -123,6 +125,8 @@ p {
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s;
+    text-align: center;
+
 }
 
 .login-button:hover {
@@ -178,18 +182,13 @@ p {
   width: 100%;
   height: 330px;
   display: inline-block;
-  border-radius: 10px;
-  padding: 15px 25px;
-  box-sizing: border-box;
-  cursor: pointer;
-  margin: 30px auto 10px auto;
   background-position: center;
   background-size: cover;
   transition: transform 0.5s;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background-image: url(../static/parl.jpg);
+  background-image: url(../static/Images/parl.jpg);
 
 }
 
@@ -250,4 +249,135 @@ p {
   height: 100%;
   justify-content: center;
   align-items: center;
+}
+
+
+
+
+
+.our-team {
+  padding: 30px 0 40px;
+  margin-bottom: 30px;
+  background-color: #f7f5ec;;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  margin-right: 25px;
+  width: 250px;
+  float: left;
+}
+
+.our-team .picture {
+  display: inline-block;
+
+  margin-bottom: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.our-team .picture::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: 135%;
+  right: 0;
+  left: 0;
+  opacity: 0.9;
+  transform: scale(3);
+  transition: all 0.3s linear 0s;
+}
+
+.our-team:hover .picture::before {
+  height: 100%;
+}
+
+.our-team .picture::after {
+  content: "";
+  width: 250px;
+  height: 330px;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.our-team .picture img {
+  width: 250px;
+  height: 330px;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.9s ease 0s;
+}
+
+.our-team:hover .picture img {
+  box-shadow: 0 0 0 14px #f7f5ec;
+  transform: scale(0.7);
+}
+
+.our-team .title {
+  display: block;
+  font-size: 15px;
+  color: #4e5052;
+  text-transform: capitalize;
+}
+
+.our-team .social {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  transition: all 0.5s ease 0s;
+}
+
+.our-team:hover .social {
+  bottom: 0;
+}
+
+
+.button-logo{
+  width: 20px; /* Set the width of the button */
+  height: 20px; /* Set the height of the button */
+  background-size: contain; /* This will make the image fit within the button */
+}
+
+.facebook {
+  background-image: url('../static/Images/facebook.jpg');
+}
+
+.insta{
+  background-image: url('../static/Images/insta.jpg');
+}
+
+.x{
+  background-image: url('../static/Images/xLogo.jpg');
+}
+
+.wiki{
+  background-image: url('../static/Images/wiki.png');
+}
+
+.our-team .social li {
+  display: inline-block;
+}
+
+.our-team .social li a {
+  display: block;
+  padding: 10px;
+  font-size: 17px;
+  color: white;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.our-team .social li a:hover {
+  color: #1369ce;
+  background-color: #f7f5ec;
 }
