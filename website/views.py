@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 views = Blueprint('views', __name__)
 
-@views.route("/")
+@views.route("/Proto1.html")
 def home():
     return render_template("Proto1.html")
 
