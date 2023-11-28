@@ -4,6 +4,10 @@ app = Flask(__name__)
 
 views = Blueprint('views', __name__)
 
+@views.route("/")
+def default():
+    return render_template("Proto1.html")
+
 @views.route("/Proto1.html")
 def home():
     return render_template("Proto1.html")
@@ -40,7 +44,7 @@ def vote():
 # Error handlers
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template("404.html"), 404
+    return render_template("Errors/404.html"), 404
 
 @app.errorhandler(500)
 def internal_server_error(error):
