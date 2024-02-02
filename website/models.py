@@ -18,6 +18,13 @@ class Candidate(db.Model):
     Party = db.Column(db.String(50))
     Constituency = db.Column(db.String(255))
 
+    @staticmethod
+    def AddCandidate(Name, Party, Constituency):
+        candidate = Candidate(Name=Name, Party=Party, Constituency=Constituency)
+        db.session.add(candidate)
+        db.session.commit()
+
+
 class Vote(db.Model):
     __tablename__ = 'Vote'
     VoteID = db.Column(db.Integer, primary_key=True, autoincrement=True)
