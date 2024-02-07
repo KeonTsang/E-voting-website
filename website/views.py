@@ -1,11 +1,16 @@
-from flask import Flask, Blueprint, render_template, redirect, url_for
+from curses import flash
+from flask import Flask, Blueprint, flash, redirect, render_template, request, url_for
 from.forms import CandidateForm
-from.models import Candidate
+from.models import Candidate, Voter
 
 
 app = Flask(__name__)
 
 views = Blueprint('views', __name__)
+
+db = SQLAlchemy()
+
+DB_NAME = "database.db"
 
 @views.route("/")
 def default():
@@ -27,13 +32,58 @@ def candidates():
 def contact():
     return render_template("contact.html")
 
-@views.route("/login")
+@views.route("/login.html", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        # Check if the email and password match a user in the database
+        user = Voter.query.filter_by(Username=email, PasswordHash=password).first()
+
+        if user:
+            # Log the user in 
+            flash("Login successful!", "success")
+            return redirect(url_for("views.home"))  # Redirect to the home page or any other desired page
+        else:
+            flash("Invalid email or password. Please try again.", "error")
+
     return render_template("login.html")
 
-@views.route("/register")
+# Route for handling voter registration
+@views.route('/register.html', methods=['GET', 'POST'])
 def register():
-    return render_template("register.html")
+    if request.method == 'POST':
+        name = request.form['name']
+        address = request.form['address']
+        dob = request.form['dob']
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Check if the email (Address) is already in use
+        existing_voter = Voter.query.filter_by(Address=address).first()
+        if existing_voter:
+            flash('Email is already in use. Please choose a different email.')
+            return redirect(url_for('register'))
+
+        # If the email is not in use, create a new voter
+        new_voter = Voter(
+            Name=name,
+            Address=address,
+            DateOfBirth=dob,
+            Username=username,
+            PasswordHash=password,  # hash the password before storing it in the database
+            Salt='your_salt_value',  # Generate a unique salt for each user
+            IsActive=True
+        )
+
+        db.session.add(new_voter)
+        db.session.commit()
+
+        flash('Registration successful. You can now log in.')
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
 
 @views.route("/results")
 def results():
