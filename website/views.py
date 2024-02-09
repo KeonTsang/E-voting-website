@@ -2,33 +2,34 @@ from curses import flash
 from flask import Flask, Blueprint, flash, redirect, render_template, request, url_for
 from.forms import CandidateForm
 from.models import Candidate, Voter
+from . import db
 
 
 app = Flask(__name__)
 
 views = Blueprint('views', __name__)
 
-db = SQLAlchemy()
+#db = SQLAlchemy()
 
-DB_NAME = "database.db"
+#DB_NAME = "database.db"
 
 @views.route("/")
 def default():
     return render_template("Proto1.html")
 
-@views.route("/Proto1")
+@views.route("/Proto1.html")
 def home():
     return render_template("Proto1.html")
 
-@views.route("/about")
+@views.route("/about.html")
 def about():
     return render_template("about.html")
 
-@views.route("/candidates")
+@views.route("/candidates.html")
 def candidates():
     return render_template("candidates.html")
 
-@views.route("/contact")
+@views.route("/contact.html")
 def contact():
     return render_template("contact.html")
 
@@ -85,15 +86,15 @@ def register():
 
     return render_template('register.html')
 
-@views.route("/results")
+@views.route("/results.html")
 def results():
     return render_template("results.html")
 
-@views.route("/vote")
+@views.route("/vote.html")
 def vote():
     return render_template("vote.html")
 
-@views.route("/admin", methods = ['GET', 'POST'])
+@views.route("/admin.html", methods = ['GET', 'POST'])
 def admin():
     candidate_form = CandidateForm()
 
@@ -117,18 +118,18 @@ def admin():
     return render_template("admin.html", candidate_form=candidate_form, candidates = candidates)
 
 
-@app.route('register', methods=['POST'])
-def register():         #register function. not fully working. plan on getting variables from user entry, then adding new user to db
-    email = request.form['email']
-    password = request.form['password']
-    username = request.form['username']
-
-    new_user = Register(Email=email, Password=password, Username=username)
-
-    db.session.add(new_user)
-    db.session.commit()
-
-    return render_template("register.html", email=email, password=password, username=username)
+# @app.route('register', methods=['POST'])
+# def register():         #register function. not fully working. plan on getting variables from user entry, then adding new user to db
+#     email = request.form['email']
+#     password = request.form['password']
+#     username = request.form['username']
+#
+#     new_user = Register(Email=email, Password=password, Username=username)
+#
+#     db.session.add(new_user)
+#     db.session.commit()
+#
+#     return render_template("register.html", email=email, password=password, username=username)
 
 # Error handlers
 @app.errorhandler(404)
