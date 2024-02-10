@@ -34,18 +34,16 @@
                         <a href="login.html" class="login-button">Login</a>
                     </div>
                 <div class="row">
-                    <div class="card card1">
-                        <h3> Joe Biden</h3>
-                    </div>
-                    <div class="card card2">
-                        <h3> Donald Trump</h3>
-                    </div>
-                    <div class="card card3">
-                        <h3>Boris Johnson</h3>
-                    </div>
-                    <div class="card card4">
-                        <h3>Rishi Sunak</h3>
-                    </div>
+                  <a href=" /candidate/{{candidate_id}}"
+                  <div class="candidates">
+                      {% for candidate in candidates %}
+                          <div class="card">
+                              <h2>{{ candidate.name }}</h2>
+                              <p>Constituency: {{ candidate.constituency }}</p>
+                              <p>Party: {{ candidate.party }}</p>
+                          </div>
+                      {% endfor %}
+                  </div>
                 </div>
             </div>
         </body>

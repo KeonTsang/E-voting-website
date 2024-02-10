@@ -27,7 +27,8 @@ def about():
 
 @views.route("/candidates.html")
 def candidates():
-    return render_template("candidates.html")
+    candidate_data = candidate.fetch_candidates()
+    return render_template("candidates.html", candidates=candidate_data)
 
 @views.route("/contact.html")
 def contact():
@@ -43,7 +44,7 @@ def login():
         user = Voter.query.filter_by(Username=email, PasswordHash=password).first()
 
         if user:
-            # Log the user in 
+            # Log the user in
             flash("Login successful!", "success")
             return redirect(url_for("views.home"))  # Redirect to the home page or any other desired page
         else:
@@ -60,7 +61,7 @@ def register():
         dob = request.form['dob']
         username = request.form['username']
         password = request.form['password']
-        
+
         # Check if the email (Address) is already in use
         existing_voter = Voter.query.filter_by(Address=address).first()
         if existing_voter:
