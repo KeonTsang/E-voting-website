@@ -39,6 +39,21 @@ def results():
 @views.route("/vote.html")
 def vote():
     return render_template("vote.html")
+@views.route("/Joe.html")
+def Joe():
+    return render_template("Joe.html")
+
+@views.route("/Boris.html")
+def Boris():
+    return render_template("Boris.html")
+
+@views.route("/Donald.html")
+def Donald():
+    return render_template("Donald.html")
+
+@views.route("/Rishi.html")
+def Rishi():
+    return render_template("Rishi.html")
 
 
 # Error handlers

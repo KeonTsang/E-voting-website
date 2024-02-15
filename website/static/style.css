@@ -251,6 +251,12 @@ p {
   align-items: center;
 }
 
+#photo  /* Photos on the candidate pages  */
+{
+  float: left;
+  border: 0px;
+  margin: 8px;
+}
 
 
 
