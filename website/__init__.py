@@ -11,6 +11,8 @@ def create_app():
 
     # Replace 'your_database_uri' with the actual URI of your database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
+
+    app.config['SECRET_KEY'] = 'password'
     
     # Initialize the database extension with the app
     db.init_app(app)
