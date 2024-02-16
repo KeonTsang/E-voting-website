@@ -25,26 +25,28 @@
                     </div>
             </section>
 
-              <div class="cardTest">
-                  <h1>Welcome to the Online Voting System </h1>
+                <div class="cardTest">
+                <h1>Welcome to the Online Voting System </h1>
                 </div>
-                <div class="content">
+            <div class="content">
 
                         <p>You must sign in to continue to vote</p>
                         <a href="login.html" class="login-button">Login</a>
                     </div>
-                <div class="row">
-                  <a href=" /candidate/{{candidate_id}}"
-                  <div class="candidates">
-                      {% for candidate in candidates %}
-                          <div class="card">
-                              <h2>{{ candidate.name }}</h2>
-                              <p>Constituency: {{ candidate.constituency }}</p>
-                              <p>Party: {{ candidate.party }}</p>
-                          </div>
-                      {% endfor %}
-                  </div>
-                </div>
+                    <form method="POST">
+                            <div class="row">
+                                <a href=" {{CandidateID}}"></a>
+                                <div class="candidates">
+                                    {% for person in candidate %}
+                                        <div class="card">
+                                            <h2>Name: {{ candidate[person]['Name']}}</h2>
+                                            <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p> 
+                                            <p>Party: {{ candidate[person]['Party'] }}</p>  
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </form>
             </div>
         </body>
 </html>

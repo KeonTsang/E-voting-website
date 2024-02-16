@@ -27,8 +27,19 @@ def about():
 
 @views.route("/candidates.html")
 def candidates():
-    candidate_data = Candidate.fetch_candidates()
-    return render_template("candidates.html", candidates=candidate_data)
+    candidate_data = Candidate.query.all()
+    candidate = {}
+    for i in candidate_data:
+        ID = i.CandidateID
+        candidate[ID] = {}
+        candidate[ID]["Name"] = i.Name
+        candidate[ID]["Party"] = i.Party
+        candidate[ID]["Constituency"] = i.Constituency
+
+    if (request.method == 'POST' and 'Name' in request.form):
+        if (request.form["Name"] != None):
+            c_NAME = request.form["Name"]
+    return render_template("candidates.html", candidate=candidate)
 
 @views.route("/contact.html")
 def contact():
@@ -94,6 +105,21 @@ def results():
 @views.route("/vote.html")
 def vote():
     return render_template("vote.html")
+@views.route("/Joe.html")
+def Joe():
+    return render_template("Joe.html")
+
+@views.route("/Boris.html")
+def Boris():
+    return render_template("Boris.html")
+
+@views.route("/Donald.html")
+def Donald():
+    return render_template("Donald.html")
+
+@views.route("/Rishi.html")
+def Rishi():
+    return render_template("Rishi.html")
 
 @views.route("/admin.html", methods = ['GET', 'POST'])
 def admin():
