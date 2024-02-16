@@ -27,7 +27,7 @@ def about():
 
 @views.route("/candidates.html")
 def candidates():
-    candidate_data = candidate.fetch_candidates()
+    candidate_data = Candidate.fetch_candidates()
     return render_template("candidates.html", candidates=candidate_data)
 
 @views.route("/contact.html")
