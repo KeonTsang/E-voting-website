@@ -3,6 +3,8 @@ from flask import Flask, Blueprint, flash, redirect, render_template, request, u
 from.forms import CandidateForm
 from.models import Candidate, Voter
 from . import db
+from website.encryption import *
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -35,11 +37,33 @@ def candidates():
         candidate[ID]["Name"] = i.Name
         candidate[ID]["Party"] = i.Party
         candidate[ID]["Constituency"] = i.Constituency
+        candidate[ID]["IMG_URL"] = i.IMG_URL
 
     if (request.method == 'POST' and 'Name' in request.form):
-        if (request.form["Name"] != None):
-            c_NAME = request.form["Name"]
+        if (request.form['Name'] != None):
+            c_NAME = request.form['Name']
+    
+    #    Can_name = request.args.get("Can_name")
+    #    if (Can_name == None):
+            
     return render_template("candidates.html", candidate=candidate)
+
+@views.route("/Candidate_Base.html", methods = ["POST" , "GET"]) 
+def Can_Page():
+    Can_name = request.args.get( "Can_name" )
+    if (Can_name == None):
+        return render_template("Proto1.html")
+    
+    if (request.method == "POST" and "Name" in request.form):
+        if (request.form["Name"]!= None):
+            c_NAME = request.form["Name"]
+
+    Searched_Can = Candidate.query.filter_by(Name = Can_name).first()
+    if (Searched_Can == None):
+        return render_template("Proto1.html")
+        
+    else :
+        return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL)
 
 @views.route("/contact.html")
 def contact():
@@ -47,31 +71,31 @@ def contact():
 
 @views.route("/login.html", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
 
-        # Check if the email and password match a user in the database
-        user = Voter.query.filter_by(Username=email, PasswordHash=password).first()
-
-        if user:
-            # Log the user in
-            flash("Login successful!", "success")
-            return redirect(url_for("views.home"))  # Redirect to the home page or any other desired page
+        voter = Voter.query.filter_by(Username=username).first()
+        if voter and check_password(password, voter.PasswordHash, voter.Salt):
+            # Authentication successful
+            return "Login Successful"
         else:
+            # If we create a 401 error page, replace the code below with the commented code
             flash("Invalid email or password. Please try again.", "error")
+            # return "Invalid username or password", 401
 
     return render_template("login.html")
 
-# Route for handling voter registration
+# register function with encryption. Needs testing
 @views.route('/register.html', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         name = request.form['name']
         address = request.form['address']
-        dob = request.form['dob']
+        dob = datetime.strptime(request.form['dob'], '%Y-%m-%d')
         username = request.form['username']
         password = request.form['password']
+        confirm = request.form['confirm']
 
         # Check if the email (Address) is already in use
         existing_voter = Voter.query.filter_by(Address=address).first()
@@ -79,16 +103,16 @@ def register():
             flash('Email is already in use. Please choose a different email.')
             return redirect(url_for('register'))
 
-        # If the email is not in use, create a new voter
-        new_voter = Voter(
-            Name=name,
-            Address=address,
-            DateOfBirth=dob,
-            Username=username,
-            PasswordHash=password,  # hash the password before storing it in the database
-            Salt='your_salt_value',  # Generate a unique salt for each user
-            IsActive=True
-        )
+        #checking that the "password" and "confirm password" inputs match
+        if password != confirm:
+            return "Passwords do not match", 400
+        
+        #generating hash (see encryption.py for function)
+        hashed_password, salt = generate_password_hash(password)
+
+        #adding the newly registered user to the database
+        new_voter = Voter(Name=name, Address=address, DateOfBirth=dob,
+                          Username=username, PasswordHash=hashed_password, Salt=salt, IsActive=True)
 
         db.session.add(new_voter)
         db.session.commit()

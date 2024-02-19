@@ -25,6 +25,7 @@ class Candidate(db.Model):
     Name = db.Column(db.String(255))
     Party = db.Column(db.String(50))
     Constituency = db.Column(db.String(255))
+    IMG_URL = db.Column(db.String(100))
 
     @staticmethod
     def AddCandidate(Name, Party, Constituency):
