@@ -86,15 +86,16 @@ def login():
 
     return render_template("login.html")
 
-# Route for handling voter registration
+# register function with encryption. Needs testing
 @views.route('/register.html', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         name = request.form['name']
         address = request.form['address']
-        dob = request.form['dob']
+        dob = datetime.strptime(request.form['dob'], '%Y-%m-%d')
         username = request.form['username']
         password = request.form['password']
+        confirm = request.form['confirm']
 
         # Check if the email (Address) is already in use
         existing_voter = Voter.query.filter_by(Address=address).first()
@@ -102,16 +103,16 @@ def register():
             flash('Email is already in use. Please choose a different email.')
             return redirect(url_for('register'))
 
-        # If the email is not in use, create a new voter
-        new_voter = Voter(
-            Name=name,
-            Address=address,
-            DateOfBirth=dob,
-            Username=username,
-            PasswordHash=password,  # hash the password before storing it in the database
-            Salt='your_salt_value',  # Generate a unique salt for each user
-            IsActive=True
-        )
+        #checking that the "password" and "confirm password" inputs match
+        if password != confirm:
+            return "Passwords do not match", 400
+        
+        #generating hash (see encryption.py for function)
+        hashed_password, salt = generate_password_hash(password)
+
+        #adding the newly registered user to the database
+        new_voter = Voter(Name=name, Address=address, DateOfBirth=dob,
+                          Username=username, PasswordHash=hashed_password, Salt=salt, IsActive=True)
 
         db.session.add(new_voter)
         db.session.commit()
@@ -180,30 +181,6 @@ def admin():
 #     db.session.commit()
 #
 #     return render_template("register.html", email=email, password=password, username=username)
-
-# register function with encryption. Needs testing
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        name = request.form['name']
-        address = request.form['address']
-        dob = datetime.strptime(request.form['dob'], '%Y-%m-%d')
-        username = request.form['username']
-        password = request.form['password']
-        confirm = request.form['confirm']
-
-        if password != confirm:
-            return "Passwords do not match", 400
-
-        hashed_password, salt = generate_password_hash(password)
-
-        new_voter = Voter(Name=name, Address=address, DateOfBirth=dob,
-                          Username=username, PasswordHash=hashed_password, Salt=salt, IsActive=True)
-        db.session.add(new_voter)
-        db.session.commit()
-
-        return redirect(url_for('login'))
-
 
 # Error handlers
 @app.errorhandler(404)
