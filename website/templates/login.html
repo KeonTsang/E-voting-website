@@ -25,14 +25,14 @@
                 </div>
             </section>
             <div class="content">
-                <! -- first name or email password -->
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" title="Please enter your username" required><br>
-
-                <label for="password">Password:</label>
-                <input type="text" id="password" name="password" title="Please enter your password" required><br>
-                <button type="submit">Log in</button>
+                <form action="/login.html" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" title="Please enter your username" required><br>
+        
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" title="Please enter your password" required><br>
+                    <button type="submit">Log in</button>
+                </form>
             </div>
-
         </body>
 </html>

@@ -81,8 +81,8 @@ def login():
             return "Login Successful"
         else:
             # If we create a 401 error page, replace the code below with the commented code
-            flash("Invalid email or password. Please try again.", "error")
-            # return "Invalid username or password", 401
+            # flash("Invalid email or password. Please try again.", "error")
+            return "Invalid username or password", 401
 
     return render_template("login.html")
 
@@ -168,19 +168,6 @@ def admin():
 
     return render_template("admin.html", candidate_form=candidate_form, candidates = candidates)
 
-
-# @app.route('register', methods=['POST'])
-# def register():         #register function. not fully working. plan on getting variables from user entry, then adding new user to db
-#     email = request.form['email']
-#     password = request.form['password']
-#     username = request.form['username']
-#
-#     new_user = Register(Email=email, Password=password, Username=username)
-#
-#     db.session.add(new_user)
-#     db.session.commit()
-#
-#     return render_template("register.html", email=email, password=password, username=username)
 
 # Error handlers
 @app.errorhandler(404)
