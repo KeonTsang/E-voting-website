@@ -387,3 +387,15 @@ p {
   color: #1369ce;
   background-color: #f7f5ec;
 }
+
+#submit-container{
+  position: relative;
+}
+
+#passwordError{
+  display: none;
+}
+
+#passwordError.show{
+  display: inline;
+}

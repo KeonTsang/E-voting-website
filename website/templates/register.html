@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="../static/style.css">
         <title>Online Voting System</title>
     </head>
-    <script src=/static/javascript/validationForm.js></script>
+    <script type="text/javascript" src=../static/javascript/validationForm.js></script>
         <body>
             <section id="header">
                 <div>
@@ -39,16 +39,19 @@
             <input type="text" id="username" name="username" required><br><br>
 
             <label for="password"> Password </label>
-            <input type="password" id="Password" name="password" required><br>
+            <input type="password" id="password" name="password" required><br>
 
             <label for="confirm"> Confirm password </label>
             <input type="password" id="confirm" name="confirm" required><br>
-            <span id="passwordError" style="color: red;"</span>
 
+            <div id="submit-container">
+            <span id="passwordErrorPlaceholder" style="color: red visibility: hidden;"&nbsp;</span>
+            <span id="passwordError" style="color: red;"> </span>
             <button type="submit">Register</button>
+          </div>
           </form>
-        <script>
-        
-            <! -- First name , last name, email , gender , password , confirm password -->
+
+
+
         </body>
 </html>
