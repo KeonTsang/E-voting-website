@@ -1,8 +1,7 @@
-from curses import flash
 from flask import Flask, Blueprint, flash, redirect, render_template, request, url_for
 from.forms import CandidateForm
 from.models import Candidate, Voter
-from . import db
+from website.models import db
 from website.encryption import *
 from datetime import datetime
 
@@ -101,7 +100,7 @@ def register():
         existing_voter = Voter.query.filter_by(Address=address).first()
         if existing_voter:
             flash('Email is already in use. Please choose a different email.')
-            return redirect(url_for('register'))
+            return redirect(url_for('views.register'))
 
         #checking that the "password" and "confirm password" inputs match
         if password != confirm:
@@ -118,7 +117,7 @@ def register():
         db.session.commit()
 
         flash('Registration successful. You can now log in.')
-        return redirect(url_for('login'))
+        return redirect(url_for('views.login'))
 
     return render_template('register.html')
 
