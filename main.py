@@ -4,6 +4,8 @@ from website import views
 from website import templates
 from website.__init__ import create_app
 from os import path
+from flask_bootstrap import Bootstrap
+
 
 app = create_app()
 
