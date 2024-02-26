@@ -466,3 +466,59 @@ p {
     padding: 5px;
     margin-bottom: 20px;
 }
+
+
+/* login page */
+.login-page .content form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    background: darkslategrey;
+}
+
+.login-page .content form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-page .content form input[type="text"],
+.content form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-page .content form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-page .content form button:hover {
+    background-color: #45a049;
+}
+
+
+.login-page .content p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-page .content p a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.login-page .content p a:hover {
+    text-decoration: underline;
+}
