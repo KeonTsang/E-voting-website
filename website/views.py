@@ -150,7 +150,7 @@ def admin():
 
     candidates = Candidate.query.all()
 
-    if candidate_form.validate_on_submit():
+    if candidate_form.is_submitted() and candidate_form.validate():
         candidate = Candidate.query.filter_by(Name=candidate_form.Name.data).first()
 
         if candidate is None:
