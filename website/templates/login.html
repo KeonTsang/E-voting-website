@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="../static/style.css">
         <title>Online Voting System</title>
     </head>
-        <body>
+        <body class="login-page">
             <section id="header">
                 <div>
                     <ul id="navbar">
@@ -25,9 +25,16 @@
                 </div>
             </section>
             <div class="content">
-                <! -- first name or email password -->
-                <label for="email">Email address:</label>
-                <input type="text" id="email" name="email" title="Please enter your e-mail address" required><br>
+                <form action="/login.html" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Type your username" title="Please enter your username" required><br>
+        
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Type your password" title="Please enter your password" required><br>
+                    <button type="submit">Log in</button>
+                </form>
+
+                <p>Don't have an account? <a href="register.html">Register here</a></p>
             </div>
         </body>
 </html>

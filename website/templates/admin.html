@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../static/style.css">
         <title>Online Voting System</title>
     </head>
-        <body>
+        <body class="admin-page">
             <section id="header">
                 <div>
                     <ul id="navbar">
@@ -16,6 +16,7 @@
                         <li><a href="vote.html">Vote</a></li>
                         <li><a href="results.html">Results</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li><a href="admin.html">Admin</a></li>
                     </ul>
                 </div>
                 <div>
@@ -25,8 +26,8 @@
                     </ul>
                 </div>
             </section>
-                <div class="content">
-                    <h1>Welcome to the Online Voting System</h1>
+                <div>
+                    <h1>Admin</h1>
                 </div>
 
                 <form action = "" method = "POST">
@@ -46,10 +47,11 @@
                 </form>
 
                 {% for candidate in candidates %}
-
-                    <h>{{ candidate.Name }}</h>
-                    <p>{{ candidate.Party }}</p>
-                    <p>{{ candidate.Constituency }}</p>
+                    <div class="candidate-info">
+                        <h4>{{ candidate.Name }}</h4>
+                        <p>Party: {{ candidate.Party }}</p>
+                        <p>Constituency: {{ candidate.Constituency }}</p>
+                    </div>
 
                 {% endfor %}
         </body>
