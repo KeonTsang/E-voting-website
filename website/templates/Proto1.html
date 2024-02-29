@@ -108,6 +108,34 @@
         <li><a href="https://www.instagram.com/realdonaldtrump/?hl=en" class="button-logo insta" aria-hidden="true"></a></li>
       </ul>
     </div>
-  
+
+
+<! Can delete all above as done in jinja below - however untested as can't see page due to the views.py importing error !>
+
+    {% for candidate in candidates %}
+    <div class="our-team">
+      <div class="picture">
+        <img class="img-fluid" src="{{  img_url }}">
+      </div>
+      <div class="team-content">
+          <a href="{{ candidate.page_url }}">
+              <h3 class="name">{{ candidate.name }}</h3>
+          </a>
+          <h4 class="title">Candidate</h4>
+          <ul class="social">
+
+                <li><a href="{{ facebook_url }}" class="button-logo facebook" aria-hidden="true"></a></li>
+                <li><a href="{{ twitter_url }}" class="button-logo twitter" aria-hidden="true"></a></li>
+                <li><a href="{{ wikipedia_url }}" class="button-logo wiki" aria-hidden="true"></a></li>
+                <li><a href="{{ instagram_url }}" class="button-logo insta" aria-hidden="true"></a></li>
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+
+
   </body>
 </html>
