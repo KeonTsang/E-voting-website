@@ -20,21 +20,21 @@ def default():
 
 @views.route("/Proto1.html")
 def home():
-    candidate_date = Candidate.query.all()
-    candidate = []
-    for candidate in candidate_date:
+    candidate_info = Candidate.query.all()
+    candidate = {}
+    for candidate in candidate_info:
         candidate_info = {
             'name': candidate.Name,
             'party': candidate.Party,
             'constituency': candidate.Constituency,
             'img_url': candidate.IMG_URL,
-            'facebook_url': candidate.facebook, #referring to models.py but not sure if db was edited in dbBrowsser to add facebook + socials columns, so implemented it in models
-            'twitter_url': candidate.twitter,
-            'instagram_url': candidate.insta,
-            'wikipedia_url': candidate.wiki
+            'facebook_url': candidate.FacebookLink, #referring to models.py but not sure if db was edited in dbBrowsser to add facebook + socials columns, so implemented it in models
+            'twitter_url': candidate.TwitterLink,
+            'instagram_url': candidate.InstagramLink,
+            'wikipedia_url': candidate.WikiLink
         }
-        candidate.append(candidate_info)    #dictionary of information so can use jinja
-    return render_template("Proto1.html")
+        #candidate.update(candidate_info)    #dictionary of information so can use jinja
+    return render_template("Proto1.html" , candidate = candidate)
 
 @views.route("/about.html")
 def about():
@@ -51,6 +51,10 @@ def candidates():
         candidate[ID]["Party"] = i.Party
         candidate[ID]["Constituency"] = i.Constituency
         candidate[ID]["IMG_URL"] = i.IMG_URL
+        candidate[ID]["FacebookLink"] = i.FacebookLink
+        candidate[ID]["TwitterLink"] = i.TwitterLink
+        candidate[ID]["InstagramLink"] = i.InstagramLink
+        candidate[ID]['WikiLink'] = i.WikiLink
 
     if (request.method == 'POST' and 'Name' in request.form):
         if (request.form['Name'] != None):
@@ -76,7 +80,7 @@ def Can_Page():
         return render_template("Proto1.html")
 
     else :
-        return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL)
+        return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL , Facebook = Searched_Can.FacebookLink , Insta = Searched_Can.InstagramLink , Wiki = Searched_Can.WikiLink , Twitter = Searched_Can.TwitterLink)
 
 @views.route("/contact.html")
 def contact():
