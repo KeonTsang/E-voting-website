@@ -1,8 +1,8 @@
 from flask import Flask, Blueprint, flash, redirect, render_template, request, url_for
-from.forms import CandidateForm
+from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
 from.models import Candidate, Voter
 from website.models import db
-from website.encryption import *
+from encryption import *
 from datetime import datetime
 
 
@@ -20,6 +20,20 @@ def default():
 
 @views.route("/Proto1.html")
 def home():
+    candidate_date = Candidate.query.all()
+    candidate = []
+    for candidate in candidate_data:
+        candidate_info = {
+            'name': candidate.Name,
+            'party': candidate.Party,
+            'constituency': candidate.Constituency,
+            'img_url': candidate.IMG_URL,
+            'facebook_url': candidate.facebook, #referring to models.py but not sure if db was edited in dbBrowsser to add facebook + socials columns, so implemented it in models
+            'twitter_url': candidate.twitter,
+            'instagram_url': candidate.insta,
+            'wikipedia_url': candidate.wiki
+        }
+        candidate_append(candidate_info)    #dictionary of information so can use jinja
     return render_template("Proto1.html")
 
 @views.route("/about.html")
@@ -41,18 +55,18 @@ def candidates():
     if (request.method == 'POST' and 'Name' in request.form):
         if (request.form['Name'] != None):
             c_NAME = request.form['Name']
-    
+
     #    Can_name = request.args.get("Can_name")
     #    if (Can_name == None):
-            
+
     return render_template("candidates.html", candidate=candidate)
 
-@views.route("/Candidate_Base.html", methods = ["POST" , "GET"]) 
+@views.route("/Candidate_Base.html", methods = ["POST" , "GET"])
 def Can_Page():
     Can_name = request.args.get( "Can_name" )
     if (Can_name == None):
         return render_template("Proto1.html")
-    
+
     if (request.method == "POST" and "Name" in request.form):
         if (request.form["Name"]!= None):
             c_NAME = request.form["Name"]
@@ -60,7 +74,7 @@ def Can_Page():
     Searched_Can = Candidate.query.filter_by(Name = Can_name).first()
     if (Searched_Can == None):
         return render_template("Proto1.html")
-        
+
     else :
         return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL)
 
@@ -103,9 +117,10 @@ def register():
             return redirect(url_for('views.register'))
 
         #checking that the "password" and "confirm password" inputs match
-        if password != confirm:
-            return "Passwords do not match", 400
-        
+    #    if password != confirm:
+        #    return "Passwords do not match", 400
+        #Above is already done using javascript validationForm.js
+
         #generating hash (see encryption.py for function)
         hashed_password, salt = generate_password_hash(password)
 
@@ -116,7 +131,7 @@ def register():
         db.session.add(new_voter)
         db.session.commit()
 
-        flash('Registration successful. You can now log in.')
+    #    flash('Registration successful. You can now log in.')
         return redirect(url_for('views.login'))
 
     return render_template('register.html')
@@ -150,7 +165,7 @@ def admin():
 
     candidates = Candidate.query.all()
 
-    if candidate_form.validate_on_submit():
+    if candidate_form.is_submitted() and candidate_form.validate():
         candidate = Candidate.query.filter_by(Name=candidate_form.Name.data).first()
 
         if candidate is None:

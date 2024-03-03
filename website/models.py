@@ -1,4 +1,4 @@
-from website.__init__ import db
+from __init__ import db
 
 class Voter(db.Model):
     __tablename__ = 'Voter'
@@ -26,6 +26,10 @@ class Candidate(db.Model):
     Party = db.Column(db.String(50))
     Constituency = db.Column(db.String(255))
     IMG_URL = db.Column(db.String(100))
+    facebook = db.Column(db.String(100))
+    twitter = db.Column(db.String(100))
+    insta = db.Column(db.String(100))
+    wiki = db.Column(db.String(100))
 
     @staticmethod
     def AddCandidate(Name, Party, Constituency):

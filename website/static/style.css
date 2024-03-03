@@ -388,6 +388,18 @@ p {
   background-color: #f7f5ec;
 }
 
+<<<<<<< HEAD
+#submit-container{
+  position: relative;
+}
+
+#passwordError{
+  display: none;
+}
+
+#passwordError.show{
+  display: inline;
+=======
 /* admin page */
 .admin-page {
     background-color: #f2f2f2;
@@ -521,4 +533,5 @@ p {
 
 .login-page .content p a:hover {
     text-decoration: underline;
+>>>>>>> 37b87257f3e850489249b9cf5acbdc3c0fc6b179
 }
