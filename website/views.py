@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, flash, redirect, render_template, request, u
 from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
 from.models import Candidate, Voter
 from website.models import db
-from encryption import *
+from website.encryption import *
 from datetime import datetime
 
 
@@ -22,7 +22,7 @@ def default():
 def home():
     candidate_date = Candidate.query.all()
     candidate = []
-    for candidate in candidate_data:
+    for candidate in candidate_date:
         candidate_info = {
             'name': candidate.Name,
             'party': candidate.Party,
@@ -33,7 +33,7 @@ def home():
             'instagram_url': candidate.insta,
             'wikipedia_url': candidate.wiki
         }
-        candidate_append(candidate_info)    #dictionary of information so can use jinja
+        candidate.append(candidate_info)    #dictionary of information so can use jinja
     return render_template("Proto1.html")
 
 @views.route("/about.html")
