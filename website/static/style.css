@@ -17,6 +17,7 @@
 .login-page .content form label {
     display: block;
     margin-bottom: 10px;
+    color: white;
 }
 
 .login-page .content form input[type="text"],
