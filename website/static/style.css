@@ -3,6 +3,256 @@
     padding: 0;
 }
 
+/* login page */
+.login-page .content form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    background: darkslategrey;
+}
+
+.login-page .content form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-page .content form input[type="text"],
+.content form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-page .content form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-page .content form button:hover {
+    background-color: #45a049;
+}
+
+
+.login-page .content p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-page .content p a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.login-page .content p a:hover {
+    text-decoration: underline;
+}
+
+
+/* admin page */
+.admin-page {
+    background-color: #f2f2f2;
+}
+
+.admin-page #header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.admin-page #navbar li a {
+    color: #fff;
+}
+
+.admin-page form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.admin-page form p {
+    margin-bottom: 10px;
+}
+
+.admin-page form input[type="text"],
+.admin-page form select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.admin-page form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.admin-page form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+.admin-page h1 {
+    color: #333;
+    text-align: center;
+}
+
+
+.admin-page p {
+    color: #555;
+    text-align: center;
+    line-height: 1;
+    margin: 10px 0;
+}
+
+.admin-page h4 {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 10px 0;
+    color: #333;
+}
+
+.admin-page h1 {
+    margin-top: 50px;
+}
+
+.admin-page .candidate-info {
+    border: 1px solid #778899;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+
+/* Registration Form Styling */
+form#registration {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: darkslategrey;
+}
+
+form#registration label {
+    display: block;
+    margin: 10px 0 5px;
+    color: white;
+}
+
+form#registration input[type="text"],
+form#registration input[type="password"],
+form#registration input[type="date"],
+form#registration input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+form#registration button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form#registration button:hover {
+    background-color: #45a049;
+}
+
+form#registration span#passwordError {
+    font-size: 0.9em;
+}
+
+form#registration input, form#registration button {
+    box-sizing: border-box;
+}
+
+
+/* Contact Form Styling */
+.contact-page .content {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.contact-page .content h1, .contact-page .content h3 {
+    color: #333;
+    text-align: center;
+}
+
+.contact-page .content form {
+    margin-top: 20px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.contact-page .content form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.contact-page .content form input[type="text"],
+.contact-page .content form input[type="email"],
+.contact-page .content form textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.contact-page .content form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-page .content form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.contact-page .content p {
+    color: #555;
+    line-height: 1.6;
+    text-align: center;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: white;
@@ -110,29 +360,6 @@ p {
     font-size: 18px;
     color: #555;
 }
-
-.login-box {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.login-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    text-align: center;
-
-}
-
-.login-button:hover {
-    background-color: #1e87d4;
-}
-
 
 .card {
   width: 200px;
@@ -399,139 +626,3 @@ p {
 
 #passwordError.show{
   display: inline;
-=======
-/* admin page */
-.admin-page {
-    background-color: #f2f2f2;
-}
-
-.admin-page #header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-}
-
-.admin-page #navbar li a {
-    color: #fff;
-}
-
-.admin-page form {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.admin-page form p {
-    margin-bottom: 10px;
-}
-
-.admin-page form input[type="text"],
-.admin-page form select {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 200px;
-}
-
-.admin-page form input[type="submit"] {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-.admin-page form input[type="submit"]:hover {
-    background-color: #555;
-}
-
-.admin-page h1 {
-    color: #333;
-    text-align: center;
-}
-
-
-.admin-page p {
-    color: #555;
-    text-align: center;
-    line-height: 1;
-    margin: 10px 0;
-}
-
-.admin-page h4 {
-    font-size: 24px;
-    text-align: center;
-    font-weight: bold;
-    line-height: 1.5;
-    margin: 10px 0;
-    color: #333;
-}
-
-.admin-page h1 {
-    margin-top: 50px;
-}
-
-.admin-page .candidate-info {
-    border: 1px solid #778899;
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 20px;
-}
-
-
-/* login page */
-.login-page .content form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-    background: darkslategrey;
-}
-
-.login-page .content form label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-.login-page .content form input[type="text"],
-.content form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-page .content form button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.login-page .content form button:hover {
-    background-color: #45a049;
-}
-
-
-.login-page .content p {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.login-page .content p a {
-    color: #337ab7;
-    text-decoration: none;
-}
-
-.login-page .content p a:hover {
-    text-decoration: underline;
->>>>>>> 37b87257f3e850489249b9cf5acbdc3c0fc6b179
-}
