@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="../static/style.css">
         <title>Online Voting System</title>
     </head>
-    <script src=/static/javascript/validationForm.js></script>
+    <script type="text/javascript" src=../static/javascript/validationForm.js></script>
         <body>
             <section id="header">
                 <div>
@@ -25,7 +25,7 @@
                     </ul>
                 </div>
             </section>
-          <form id=registration onsubmit='return validation()' action="/register.html" method="post">
+        <form id=registration onsubmit='return validation()' action="/register.html" method="post">
             <label for="name"> Full Name </label>
             <input type="text" id="name" name="name" required><br>
 
@@ -43,12 +43,19 @@
 
             <label for="confirm"> Confirm password </label>
             <input type="password" id="confirm" name="confirm" required><br>
+
             <span id="passwordError" style="color: red;"></span>
 
-            <button type="submit">Register</button>
-          </form>
-        </body>
-    <script>
 
-            //<! -- First name , last name, email , gender , password , confirm password -->
+            <div id="submit-container">
+                <span id="passwordErrorPlaceholder" style="color: red visibility: hidden;"&nbsp;</span>
+                <span id="passwordError" style="color: red;"> </span>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+
+
+
+
+        </body>
 </html>
