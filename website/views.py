@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, flash, redirect, render_template, request, url_for
+from flask import Flask, Blueprint, flash, redirect, render_template, request, session, url_for
 from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
 from.models import Candidate, Voter
 from website.models import db
@@ -95,7 +95,8 @@ def login():
         voter = Voter.query.filter_by(Username=username).first()
         if voter and check_password(password, voter.PasswordHash, voter.Salt):
             # Authentication successful
-            return "Login Successful"
+            session['user_id'] = voter.id  # Store user ID in the session
+            return redirect(url_for('views.vote'))
         else:
             # If we create a 401 error page, replace the code below with the commented code
             # flash("Invalid email or password. Please try again.", "error")
@@ -146,7 +147,19 @@ def results():
 
 @views.route("/vote.html")
 def vote():
-    return render_template("vote.html")
+    # Retrieve user information from the session
+    user_id = session.get('user_id')
+
+    # Check if the user is authenticated (user_id is present in the session)
+    if user_id:
+        
+        user = Voter.query.get(user_id)
+        return render_template("vote.html", user=user)
+    
+    else:
+        # Redirect the user to the login page if not authenticated
+        return redirect(url_for('views.login'))
+    
 @views.route("/Joe.html")
 def Joe():
     return render_template("Joe.html")
