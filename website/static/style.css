@@ -7,7 +7,7 @@
 .login-page .content form {
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 30px;
     border: 1px solid #ccc;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
@@ -22,7 +22,7 @@
 
 .login-page .content form input[type="text"],
 .content form input[type="password"] {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -161,7 +161,7 @@ form#registration input[type="text"],
 form#registration input[type="password"],
 form#registration input[type="date"],
 form#registration input[type="email"] {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
