@@ -1,40 +1,19 @@
+{% extends 'base.html' %}
+{% block page_content %}
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/style.css">
-        <title>Online Voting System</title>
-    </head>
-        <body class="login-page">
-            <section id="header">
-                <div>
-                    <ul id="navbar">
-                        <li><a href="Proto1.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="candidates.html">Candidates</a></li>
-                        <li><a href="vote.html">Vote</a></li>
-                        <li><a href="results.html">Results</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul id="navbar-right">
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href ="register.html">Register</a></li>
-                    </ul>
-                </div>
-            </section>
-            <div class="content">
-                <form action="/login.html" method="post">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Type your username" title="Please enter your username" required><br>
-        
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Type your password" title="Please enter your password" required><br>
-                    <button type="submit">Log in</button>
-                </form>
+    <body class="login-page">
+        <div class="content">
+            <form action="/login.html" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Type your username" title="Please enter your username" required><br>
 
-                <p>Don't have an account? <a href="register.html">Register here</a></p>
-            </div>
-        </body>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Type your password" title="Please enter your password" required><br>
+                <button type="submit">Log in</button>
+            </form>
+
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </body>
 </html>
+{% endblock %}

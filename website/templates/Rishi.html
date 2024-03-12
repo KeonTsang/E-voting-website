@@ -1,42 +1,21 @@
+{% extends 'base.html' %}
+{% block page_content %}
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/style.css">
-        <title>Online Voting System</title>
-    </head>
-        <body>
-            <section id="header">
-                <div>
-                    <ul id="navbar">
-                        <li><a href="Proto1.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="candidates.html">Candidates</a></li>
-                        <li><a href="vote.html">Vote</a></li>
-                        <li><a href="results.html">Results</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul id="navbar-right">
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href ="register.html">Register</a></li>
-                    </ul>
-                </div>
-            </section>
-            <div class="content">
-                <a href="https://en.wikipedia.org/wiki/Rishi_Sunak">
-                    <img ID ="photo" src="../static/Images/rishi.jpg" alt="photo Rishi Sunak" width="40%">
-                </a>
-                <h2>Rishi Sunak:</h2><br>
-                <p>
-                    Rishi Sunak ( born 12 May 1980) is a British politician who has served as Prime Minister of the United Kingdom and Leader of the Conservative Party since 2022. The first British Asian prime minister, he previously held two cabinet positions under Boris Johnson, latterly as Chancellor of the Exchequer from 2020 to 2022. Sunak has been Member of Parliament (MP) for Richmond (Yorks) since 2015. <br>
-                    <br> Sunak was born in Southampton to parents of Indian descent who immigrated to Britain from East Africa in the 1960s. He was educated at Winchester College, studied philosophy, politics and economics at Lincoln College, Oxford, and earned an MBA from Stanford University in California as a Fulbright Scholar. During his time at Oxford University, Sunak undertook an internship at Conservative Central Office, and joined the Conservative Party. After graduating, Sunak worked for Goldman Sachs and later as a partner at the hedge fund firms the Children's Investment Fund Management and Theleme Partners. <br>
-                    <br> Sunak was elected to the House of Commons for Richmond in North Yorkshire at the 2015 general election. As a backbencher, Sunak supported the successful campaign for Brexit in the 2016 European Union membership referendum. Following the 2017 general election, Sunak was appointed to a junior ministerial position in Theresa May's second government as Parliamentary Under-Secretary of State for Local Government in the 2018 cabinet reshuffle. He voted three times in favour of May's Brexit withdrawal agreement, which was rejected by Parliament three times, leading to May announcing her resignation. During the 2019 Conservative Party leadership election, Sunak supported Johnson's successful bid to succeed May as Conservative leader and prime minister, after which Johnson appointed Sunak as chief secretary to the Treasury in July 2019.<br>
-                    <br> Following the 2019 general election, Johnson promoted Sunak to Chancellor of the Exchequer in the 2020 cabinet reshuffle after the resignation of Sajid Javid. During his time in the position, Sunak was prominent in the government's financial response to the COVID-19 pandemic and its economic impact, including the Coronavirus Job Retention and Eat Out to Help Out schemes. He was also involved in the government's response to the cost of living crisis, UK energy supply crisis, and global energy crisis. Sunak resigned as chancellor in July 2022 amid a government crisis that culminated in Johnson's resignation. <br>
-                    <br> Sunak stood in the July to September Conservative Party leadership election to succeed Johnson. He had received the most votes in each of the series of MP votes, but lost the members' vote to Foreign Secretary Liz Truss. After spending the duration of Truss's premiership on the backbenches, Sunak was elected unopposed in the October 2022 Conservative Party leadership election to succeed Truss, who resigned amid another government crisis; at 42, he became the youngest prime minister since Robert Jenkinson, 2nd Earl of Liverpool in 1812. Sunak took office amid the cost of living crisis and energy supply crisis that began during his chancellorship, as well as amid industrial disputes and strikes.He has authorised foreign aid and weapons shipments to Ukraine in response to the Russian invasion of the country. <br>
-                </p>
-                <br><br><A href="https://en.wikipedia.org/wiki/Rishi_Sunak" ><p>Source: https://en.wikipedia.org/wiki/Rishi_Sunak</p></A>
-            </div>
-        </body>
+    <body>
+        <div class="content">
+            <a href="https://en.wikipedia.org/wiki/Rishi_Sunak">
+                <img ID ="photo" src="../static/Images/rishi.jpg" alt="photo Rishi Sunak" width="40%">
+            </a>
+            <h2>Rishi Sunak:</h2><br>
+            <p>
+                Rishi Sunak ( born 12 May 1980) is a British politician who has served as Prime Minister of the United Kingdom and Leader of the Conservative Party since 2022. The first British Asian prime minister, he previously held two cabinet positions under Boris Johnson, latterly as Chancellor of the Exchequer from 2020 to 2022. Sunak has been Member of Parliament (MP) for Richmond (Yorks) since 2015. <br>
+                <br> Sunak was born in Southampton to parents of Indian descent who immigrated to Britain from East Africa in the 1960s. He was educated at Winchester College, studied philosophy, politics and economics at Lincoln College, Oxford, and earned an MBA from Stanford University in California as a Fulbright Scholar. During his time at Oxford University, Sunak undertook an internship at Conservative Central Office, and joined the Conservative Party. After graduating, Sunak worked for Goldman Sachs and later as a partner at the hedge fund firms the Children's Investment Fund Management and Theleme Partners. <br>
+                <br> Sunak was elected to the House of Commons for Richmond in North Yorkshire at the 2015 general election. As a backbencher, Sunak supported the successful campaign for Brexit in the 2016 European Union membership referendum. Following the 2017 general election, Sunak was appointed to a junior ministerial position in Theresa May's second government as Parliamentary Under-Secretary of State for Local Government in the 2018 cabinet reshuffle. He voted three times in favour of May's Brexit withdrawal agreement, which was rejected by Parliament three times, leading to May announcing her resignation. During the 2019 Conservative Party leadership election, Sunak supported Johnson's successful bid to succeed May as Conservative leader and prime minister, after which Johnson appointed Sunak as chief secretary to the Treasury in July 2019.<br>
+                <br> Following the 2019 general election, Johnson promoted Sunak to Chancellor of the Exchequer in the 2020 cabinet reshuffle after the resignation of Sajid Javid. During his time in the position, Sunak was prominent in the government's financial response to the COVID-19 pandemic and its economic impact, including the Coronavirus Job Retention and Eat Out to Help Out schemes. He was also involved in the government's response to the cost of living crisis, UK energy supply crisis, and global energy crisis. Sunak resigned as chancellor in July 2022 amid a government crisis that culminated in Johnson's resignation. <br>
+                <br> Sunak stood in the July to September Conservative Party leadership election to succeed Johnson. He had received the most votes in each of the series of MP votes, but lost the members' vote to Foreign Secretary Liz Truss. After spending the duration of Truss's premiership on the backbenches, Sunak was elected unopposed in the October 2022 Conservative Party leadership election to succeed Truss, who resigned amid another government crisis; at 42, he became the youngest prime minister since Robert Jenkinson, 2nd Earl of Liverpool in 1812. Sunak took office amid the cost of living crisis and energy supply crisis that began during his chancellorship, as well as amid industrial disputes and strikes.He has authorised foreign aid and weapons shipments to Ukraine in response to the Russian invasion of the country. <br>
+            </p>
+            <br><br><A href="https://en.wikipedia.org/wiki/Rishi_Sunak" ><p>Source: https://en.wikipedia.org/wiki/Rishi_Sunak</p></A>
+        </div>
+    </body>
 </html>
+{% endblock %}

@@ -1,47 +1,26 @@
+{% extends 'base.html' %}
+{% block page_content %}
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/style.css">
-        <title>Online Voting System</title>
-    </head>
-        <body class="contact-page">
-            <section id="header">
-                <div>
-                    <ul id="navbar">
-                        <li><a href="Proto1.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="candidates.html">Candidates</a></li>
-                        <li><a href="vote.html">Vote</a></li>
-                        <li><a href="results.html">Results</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul id="navbar-right">
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href ="register.html">Register</a></li>
-                    </ul>
-                </div>
-            </section>
-                <div class="content">
-                    <h1>Contact us</h1>
-                        <form> 
-                            <label for="fname"> First name:</label><br>
-                            <input type="text" id="fname" name="fname"><br>
-                            <label for="lname">Last Name:</label><br>
-                            <input type="text" id="lname" name="lname"><br>
-                            <label for="email">Email:</label><br>
-                            <input type="text" id="email" name="email"><br>
-                            <label for="message">Add your message below</label><br>
-                            <textarea id="message" name ="message" rows="4" cols="50"></textarea><br>
-                            <input type="submit" value="Submit">
-                        </form>
-                        <br>
-                    <h3>Or use the following :</h3>
-                        <p>Email : [insert email]</p>
-                        <p>Phone number : [insert phone number]</p>
-                        <p> Post : Houses of Parliament, St Margaret St,London SW1A 0AA</p>
-                </div>
-        </body>
+    <body class="contact-page">
+            <div class="content">
+                <h1>Contact us</h1>
+                    <form>
+                        <label for="fname"> First name:</label><br>
+                        <input type="text" id="fname" name="fname"><br>
+                        <label for="lname">Last Name:</label><br>
+                        <input type="text" id="lname" name="lname"><br>
+                        <label for="email">Email:</label><br>
+                        <input type="text" id="email" name="email"><br>
+                        <label for="message">Add your message below</label><br>
+                        <textarea id="message" name ="message" rows="4" cols="50"></textarea><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                    <br>
+                <h3>Or use the following :</h3>
+                    <p>Email : hcenquiries@parliament.uk</p>
+                    <p>Phone number : 0800 112 4272</p>
+                    <p> Post : Houses of Parliament, St Margaret St,London SW1A 0AA</p>
+            </div>
+    </body>
 </html>
+{% endblock %}
