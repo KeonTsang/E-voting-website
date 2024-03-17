@@ -15,12 +15,6 @@
                                 <a href=" {{CandidateID}}"></a>
                                 <div class="candidates">
                                     {% for person in candidate %}
-<<<<<<< HEAD
-                                        <div class="card">
-                                            <h2>Name: {{ candidate[person]['Name']}}</h2>
-                                            <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p>
-                                            <p>Party: {{ candidate[person]['Party'] }}</p>
-=======
                                         <div class="our-team">
                                             <input type="hidden" id = "data" name="{{person}} , {{candidate[person]['Name']}} , {{candidate[person]['Constituency']}} ,{{candidate[person]['Party']}} , {{ candidate[person]['Party'] }} ">
                                                 <!-- <a href="/Candidate?Name={{person}}">
@@ -30,7 +24,6 @@
                                                 <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p>
                                                 <p>Party: {{ candidate[person]['Party'] }}</p>
                                                 <p>Photo :</p> <img src="/{{ candidate[person]['IMG_URL'] }}" id="photo" alt="{{person}}" style="height: 300px; width: 250px;">
->>>>>>> 0285fb6ac4a85379cdbc44ce1d0b2be1af81f627
                                         </div>
                                     {% endfor %}
                                 </div>
