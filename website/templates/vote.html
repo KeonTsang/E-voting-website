@@ -1,41 +1,33 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/style.css">
-        <title>Online Voting System</title>
-    </head>
-        <body>
-            <section id="header">
-                <div>
-                    <ul id="navbar">
-                        <li><a href="Proto1.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="candidates.html">Candidates</a></li>
-                        <li><a href="vote.html">Vote</a></li>
-                        <li><a href="results.html">Results</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                        <ul id="navbar-right">
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href ="register.html">Register</a></li>
-                        </ul>
-                </div>
-            </section>
+{% extends 'base.html' %}
+{% block page_content %}
+<html lang="en">
+    <body>
+        <div class="content">
+            <h1>Welcome to the Online Voting System</h1>
+            <p>This is a prototype website that is very simple. You can find a navigation bar at the top.</p>
+        </div>
 
-                    <div class="content">
-                        <h1>Welcome to the Online Voting System</h1>
-                        <p>This is a prototype website that is very simple. You can find a navigation bar at the top.</p>
-                    </div>
-
-                <div class="content">
-
-                    <div class="login-box">
-                        <p>You must sign in to continue to vote</p>
-                        <a href="login.html" class="login-button">Login</a>
-                    </div>
-                </div>
-        </body>
+        <div class="content">
+            <div class="login-box">
+                {% if user_authenticated %}
+                    <p>View the list of candidates and cast your vote:</p>
+                    <form method="POST" action="/submit_vote">
+                        <!-- Display the list of candidates -->
+                        {% for candidate in candidate_list %}
+                            <label>
+                                <input type="radio" name="voted_candidate" value="{{ candidate.id }}">
+                                {{ candidate.name }} - {{ candidate.party }}
+                            </label><br>
+                        {% endfor %}
+                        <br>
+                        <input type="submit" value="Cast Vote" class="login-button">
+                    </form>
+                {% else %}
+                    <p>You must sign in to continue to vote</p>
+                    <a href="login.html" class="login-button">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </body>
 </html>
+{% endblock %}

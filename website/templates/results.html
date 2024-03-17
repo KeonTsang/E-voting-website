@@ -1,40 +1,48 @@
+{% extends 'base.html' %}
+{% block page_content %}
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/style.css">
-        <title>Online Voting System</title>
-    </head>
     <body>
-        <section id="header">
-            <div>
-                <ul id="navbar">
-                    <li><a href="Proto1.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="candidates.html">Candidates</a></li>
-                    <li><a href="vote.html">Vote</a></li>
-                    <li><a href="results.html">Results</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul id="navbar-right">
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href ="register.html">Register</a></li>
-                </ul>
-            </div>
-        </section>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+         <h2>Voting Results</h2>
+         <canvas id="myChart" width="400" height="200"></canvas>
+         <script>
+                 var ctx = document.getElementById('myChart').getContext('2d');
 
-            <div class="content">
-                <h1>Welcome to the Online Voting System</h1>
-                <p>This is a prototype website that is very simple. You can find a navigation bar at the top.</p>
-            </div>
 
-            <div class="content"
-                <div class="login-box">
-                    <p>You must sign in to continue to vote</p>
-                    <a href="login.html" class="login-button">Login</a>
-                </div>
-            </div>
-    </body>
+                 //get vote data from flas
+                 var candidatesData = JSON.parse('{{ candidates | tojson | safe }}');
+                 var votesData = candidatesData.map(candidate => candidate.votes);
+
+                 // step size for interval on y axis
+                 var maxVotes = Math.max(...votesData);
+                 var stepSize = Math.ceil(maxVotes / 5);
+
+                 var myChart = new Chart(ctx, {
+                     type: 'bar',
+                     data: {
+                         labels: candidatesData.map(candidate => candidate.name),
+                         datasets: [{
+                             label: 'Votes',
+                             data: votesData,
+                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                             borderColor: 'rgba(54, 162, 235, 1)',
+                             borderWidth: 1
+                         }]
+                     },
+                     options: {
+                         scales: {
+                             y: {
+                                 beginAtZero: true,
+                                 ticks: {
+                                     stepSize: stepSize
+                                 }
+                             }
+                         }
+                     }
+                 });
+
+             </script>
+                      <! External file is not working for some reason - but js works !>
+         </body>
 </html>
+{% endblock %}

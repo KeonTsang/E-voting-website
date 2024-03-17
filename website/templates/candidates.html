@@ -1,30 +1,7 @@
+{% extends 'base.html' %}
+{% block page_content %}
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/style.css">
-        <title>Online Voting System</title>
-    </head>
         <body>
-            <section id="header">
-                    <div>
-                        <ul id="navbar">
-                            <li><a href="Proto1.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="candidates.html">Candidates</a></li>
-                            <li><a href="vote.html">Vote</a></li>
-                            <li><a href="results.html">Results</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul id="navbar-right">
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href ="register.html">Register</a></li>
-                        </ul>
-                    </div>
-            </section>
-
                 <div class="cardTest">
                 <h1>Welcome to the Online Voting System </h1>
                 </div>
@@ -38,22 +15,20 @@
                                 <a href=" {{CandidateID}}"></a>
                                 <div class="candidates">
                                     {% for person in candidate %}
-<<<<<<< HEAD
-                                        <div class="card">
-                                            <h2>Name: {{ candidate[person]['Name']}}</h2>
-                                            <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p>
-                                            <p>Party: {{ candidate[person]['Party'] }}</p>
-=======
                                         <div class="our-team">
                                             <input type="hidden" id = "data" name="{{person}} , {{candidate[person]['Name']}} , {{candidate[person]['Constituency']}} ,{{candidate[person]['Party']}} , {{ candidate[person]['Party'] }} ">
-                                                <!-- <a href="/Candidate?Name={{person}}"> 
+                                                <!-- <a href="/Candidate?Name={{person}}">
                                                     <h2>Name: {{ candidate[person]['Name']}}</h2>
                                                 </a> -->
                                                 <h2>Name: {{ candidate[person]['Name']}}</h2>
-                                                <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p> 
+                                                <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p>
                                                 <p>Party: {{ candidate[person]['Party'] }}</p>
-                                                <p>Photo :</p> <img src="/{{ candidate[person]['IMG_URL'] }}" id="photo" alt="{{person}}" style="height: auto; width: 100%;">
->>>>>>> 37b87257f3e850489249b9cf5acbdc3c0fc6b179
+<<<<<<< HEAD
+                                                <p>Photo :</p> <img src="/{{ candidate[person]['IMG_URL'] }}" id="photo" alt="{{person}}" style="height: 360px; width: 100%;">
+=======
+                                                <p>Photo :</p> <img src="/{{ candidate[person]['IMG_URL'] }}" id="photo" alt="{{person}}" style="height: 300px; width: 250px;">
+>>>>>>> 0285fb6ac4a85379cdbc44ce1d0b2be1af81f627
+>>>>>>> 5dfb08408cbcf1d31126df646c8420e9cf46403f
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -62,3 +37,4 @@
             </div>
         </body>
 </html>
+{% endblock %}
