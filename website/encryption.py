@@ -11,7 +11,7 @@ def generate_password_hash(password):
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
 
     #for testing:
-    print(hashed_password.decode('utf-8'), salt.decode('utf-8'))
+    #print(hashed_password.decode('utf-8'), salt.decode('utf-8'))
 
  # Return the hashed password and salt
     return hashed_password.decode('utf-8'), salt.decode('utf-8')
@@ -21,7 +21,7 @@ def check_password(password, stored_password_hash, salt):
     # Hash the entered password with the stored salt
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt.encode('utf-8'))
     hashed_password = hashed_password.decode('utf-8')
-    
+
     #testing
     #print(password, stored_password_hash, salt, hashed_password)
     #print(hashed_password.decode('utf-8'))
