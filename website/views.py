@@ -97,7 +97,7 @@ def login():
         voter = Voter.query.filter_by(Username=username).first()
         if voter and check_password(password, voter.PasswordHash, voter.Salt):
             # Authentication successful
-            session['user_id'] = voter.id  # Store user ID in the session
+            session['user_id'] = voter.VoterID  # Store user ID in the session
             return redirect(url_for('views.vote'))
         else:
             # If we create a 401 error page, replace the code below with the commented code

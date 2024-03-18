@@ -4,12 +4,11 @@ from os import path
 
 db = SQLAlchemy()
 
-DB_NAME = "database.db"
+DB_NAME = "mydatabase.db"
 
 def create_app():
     app = Flask(__name__)
 
-    # Replace 'your_database_uri' with the actual URI of your database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
 
     app.config['SECRET_KEY'] = 'password'
