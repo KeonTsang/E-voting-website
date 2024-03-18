@@ -254,6 +254,12 @@ form#registration input, form#registration button {
     text-align: center;
 }
 
+
+.about-page .content h1 {
+  color: #333;
+  text-align: center;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: white;
