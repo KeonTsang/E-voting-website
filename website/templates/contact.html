@@ -4,7 +4,7 @@
     <body class="contact-page">
             <div class="content">
                 <h1>Contact us</h1>
-                    <form>
+                    <form action="{{ url_for('views.contact') }}" method="post">
                         <label for="fname"> First name:</label><br>
                         <input type="text" id="fname" name="fname"><br>
                         <label for="lname">Last Name:</label><br>
