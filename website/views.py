@@ -39,6 +39,7 @@ def home():
 
 @views.route("/about.html")
 def about():
+
     return render_template("about.html")
 
 @views.route("/candidates.html")
@@ -61,6 +62,8 @@ def candidates():
     if (request.method == 'POST' and 'Name' in request.form):
         if (request.form['Name'] != None):
             c_NAME = request.form['Name']
+
+
 
     #    Can_name = request.args.get("Can_name")
     #    if (Can_name == None):
@@ -191,7 +194,11 @@ def vote():
 
 @views.route("/Joe.html")
 def Joe():
-    return render_template("Joe.html")
+    candidate = Candidate.query.first()
+
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Joe.html", text=text)
 
 @views.route("/Boris.html")
 def Boris():
