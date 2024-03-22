@@ -4,3 +4,6 @@ Make candidate descriptions not hardcoded - add them to the database - maybe as 
 Potentially adapt the website so that a script can be run or a large amount of votes can be cast
 contact us not working
 need to get vote working as well
+
+
+Add verification for registration - enter fake nhs number or video...
