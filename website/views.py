@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, flash, redirect, render_template, request, session, url_for
 from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
-from.models import Candidate, Voter, Vote
+from.models import Candidate, Voter, Vote, Message
 from website.models import db
 from website.encryption import *
 from datetime import datetime
@@ -39,6 +39,7 @@ def home():
 
 @views.route("/about.html")
 def about():
+
     return render_template("about.html")
 
 @views.route("/candidates.html")
@@ -62,6 +63,8 @@ def candidates():
         if (request.form['Name'] != None):
             c_NAME = request.form['Name']
 
+
+
     #    Can_name = request.args.get("Can_name")
     #    if (Can_name == None):
 
@@ -84,9 +87,23 @@ def Can_Page():
     else :
         return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL , Facebook = Searched_Can.FacebookLink , Insta = Searched_Can.InstagramLink , Wiki = Searched_Can.WikiLink , Twitter = Searched_Can.TwitterLink)
 
-@views.route("/contact.html")
+@views.route("/contact.html", methods=['GET', 'POST'])
 def contact():
+    if request.method == 'POST':
+        fname = request.form['fname']
+        lname = request.form['lname']
+        email = request.form['email']
+        message_text = request.form['message']
+
+        message = Message(fname=fname, lname=lname, email=email, message=message_text)
+        db.session.add(message)
+        db.session.commit()
     return render_template("contact.html")
+
+@views.route("/messages.html")
+def messages():
+    messages = Message.query.all()
+    return render_template('messages.html', messages=messages)
 
 @views.route("/login.html", methods=["GET", "POST"])
 def login():
@@ -206,7 +223,11 @@ def vote_confirmation():
 
 @views.route("/Joe.html")
 def Joe():
-    return render_template("Joe.html")
+    candidate = Candidate.query.first()
+
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Joe.html", text=text)
 
 @views.route("/Boris.html")
 def Boris():

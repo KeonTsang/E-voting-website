@@ -30,6 +30,7 @@ class Candidate(db.Model):
     TwitterLink = db.Column(db.String(100))
     InstagramLink = db.Column(db.String(100))
     WikiLink = db.Column(db.String(100))
+    descriptionLink = db.Column(db.String(255))
 
     @staticmethod
     def AddCandidate(Name, Party, Constituency):
@@ -50,3 +51,10 @@ class AuditTrail(db.Model):
     Event = db.Column(db.String(255))
     Timestamp = db.Column(db.DateTime)
     UserID = db.Column(db.Integer)
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fname = db.Column(db.String(50))
+    lname = db.Column(db.String(50))
+    email = db.Column(db.String(100))
+    message = db.Column(db.Text)

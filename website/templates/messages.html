@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<html>
+<head>
+    <title>Messages</title>
+</head>
+<body>
+    <div class="messages">
+        <h1>Messages</h1>
+        {% for message in messages %}
+            <div class="message">
+                <div class="message-header">
+                    <p><strong>Name:</strong> {{ message.fname }} {{ message.lname }}</p>
+                    <p><strong>Email:</strong> {{ message.email }}</p>
+                </div>
+                <div class="message-body">
+                    <p><strong>Message:</strong> {{ message.message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock %}
