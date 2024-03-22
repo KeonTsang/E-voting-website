@@ -231,15 +231,24 @@ def Joe():
 
 @views.route("/Boris.html")
 def Boris():
-    return render_template("Boris.html")
+    candidate = Candidate.query.first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Boris.html" , text=text)
 
 @views.route("/Donald.html")
 def Donald():
-    return render_template("Donald.html")
+    candidate = Candidate.query.first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Donald.html",  text=text)
 
 @views.route("/Rishi.html")
 def Rishi():
-    return render_template("Rishi.html")
+    candidate = Candidate.query.first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Rishi.html", text=text)
 
 @views.route("/admin.html", methods = ['GET', 'POST'])
 def admin():
