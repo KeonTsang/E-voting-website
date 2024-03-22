@@ -177,19 +177,48 @@ def results():
 
 @views.route("/vote.html")
 def vote():
-    # Retrieve user information from the session
-    user_id = session.get('user_id')
-
-    # Check if the user is authenticated (user_id is present in the session)
-    if user_id:
-
-        user = Voter.query.get(user_id)
-        return render_template("vote.html", user=user)
-
+    if 'user_id' in session:
+        candidate_list = Candidate.query.all()
+        return render_template("vote.html", user_authenticated=True, candidate_list=candidate_list)
     else:
-        # Redirect the user to the login page if not authenticated
-        return redirect(url_for('views.login'))
+        return render_template("vote.html", user_authenticated=False)
 
+@views.route("/submit_vote", methods=["POST"])
+def submit_vote():
+    if 'user_id' in session:
+        voted_candidate_id = request.form.get('voted_candidate')
+        voter_id = session['user_id']
+
+        # Check if the user has already voted
+        #existing_vote = Vote.query.filter_by(VoterID=voter_id).first()
+        #if existing_vote:
+        #    return "You have already voted.", 400
+        if voted_candidate_id != "":
+            print(voted_candidate_id)
+        # Save the vote
+        vote = Vote(VoterID=voter_id, CandidateID=voted_candidate_id)
+        db.session.add(vote)
+        db.session.commit()
+
+        session["voted_candidate_id"] = voted_candidate_id
+
+        return redirect(url_for('views.vote_confirmation'))  # Redirect to success page
+    else:
+        return "You must be logged in to vote.", 401
+    
+@views.route('/vote_confirmation')
+def vote_confirmation():
+    if 'voted_candidate_id' in session:
+        candidate_id = session['voted_candidate_id']
+        #get candidate details by their ID
+        candidate = Candidate.query.filter_by(CandidateID=candidate_id).first()
+        candidate_name = candidate.Name
+        candidate_party = candidate.Party
+    else:
+        # Redirect to home if there's no candidate_id in the session
+        return render_template("Proto1.html")
+
+    return render_template('vote_confirmation.html', candidate_name=candidate_name, candidate_party=candidate_party)
 
 
 @views.route("/Joe.html")
@@ -202,15 +231,24 @@ def Joe():
 
 @views.route("/Boris.html")
 def Boris():
-    return render_template("Boris.html")
+    candidate = Candidate.query.first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Boris.html" , text=text)
 
 @views.route("/Donald.html")
 def Donald():
-    return render_template("Donald.html")
+    candidate = Candidate.query.first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Donald.html",  text=text)
 
 @views.route("/Rishi.html")
 def Rishi():
-    return render_template("Rishi.html")
+    candidate = Candidate.query.first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Rishi.html", text=text)
 
 @views.route("/admin.html", methods = ['GET', 'POST'])
 def admin():

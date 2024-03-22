@@ -3,8 +3,7 @@
 <html lang="en">
     <body>
         <div class="content">
-            <h1>Welcome to the Online Voting System</h1>
-            <p>This is a prototype website that is very simple. You can find a navigation bar at the top.</p>
+            <p>Cast your vote</p>
         </div>
 
         <div class="content">
@@ -15,8 +14,8 @@
                         <!-- Display the list of candidates -->
                         {% for candidate in candidate_list %}
                             <label>
-                                <input type="radio" name="voted_candidate" value="{{ candidate.id }}">
-                                {{ candidate.name }} - {{ candidate.party }}
+                                <input type="radio" name="voted_candidate" value="{{ candidate.CandidateID }}">
+                                {{ candidate.Name }} - {{ candidate.Party }}
                             </label><br>
                         {% endfor %}
                         <br>
