@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+<html lang="en">
+    <body>
+        <div class="content">
+            <h1>Vote Confirmation</h1>
+            <p>Thank you for casting your vote!</p>
+            {% if candidate_name %}
+                <p>You have voted for: <strong>{{ candidate_name }}</strong> - {{ candidate_party }}</p>
+            {% else %}
+                <p>We were unable to process the candidate you voted for. Please contact support if you think this is a mistake.</p>
+            {% endif %}
+            <a href="/" class="return-home-button">Return Home</a>
+        </div>
+    </body>
+</html>
+{% endblock %}
