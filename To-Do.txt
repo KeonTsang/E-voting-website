@@ -2,3 +2,5 @@ Login and register page both working with flask and database
 Live graphs??
 Make candidate descriptions not hardcoded - add them to the database - maybe as a file like how the candidate images are kept?
 Potentially adapt the website so that a script can be run or a large amount of votes can be cast
+contact us not working
+need to get vote working as well

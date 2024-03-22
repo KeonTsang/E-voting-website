@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, flash, redirect, render_template, request, session, url_for
 from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
-from.models import Candidate, Voter, Vote
+from.models import Candidate, Voter, Vote, Message
 from website.models import db
 from website.encryption import *
 from datetime import datetime
@@ -84,9 +84,23 @@ def Can_Page():
     else :
         return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL , Facebook = Searched_Can.FacebookLink , Insta = Searched_Can.InstagramLink , Wiki = Searched_Can.WikiLink , Twitter = Searched_Can.TwitterLink)
 
-@views.route("/contact.html")
+@views.route("/contact.html", methods=['GET', 'POST'])
 def contact():
+    if request.method == 'POST':
+        fname = request.form['fname']
+        lname = request.form['lname']
+        email = request.form['email']
+        message_text = request.form['message']
+
+        message = Message(fname=fname, lname=lname, email=email, message=message_text)
+        db.session.add(message)
+        db.session.commit()
     return render_template("contact.html")
+
+@views.route("/messages.html")
+def messages():
+    messages = Message.query.all()
+    return render_template('messages.html', messages=messages)
 
 @views.route("/login.html", methods=["GET", "POST"])
 def login():
@@ -97,7 +111,7 @@ def login():
         voter = Voter.query.filter_by(Username=username).first()
         if voter and check_password(password, voter.PasswordHash, voter.Salt):
             # Authentication successful
-            session['user_id'] = voter.id  # Store user ID in the session
+            session['user_id'] = voter.VoterID  # Store user ID in the session
             return redirect(url_for('views.vote'))
         else:
             # If we create a 401 error page, replace the code below with the commented code
