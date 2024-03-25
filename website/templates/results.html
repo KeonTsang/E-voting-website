@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block page_content %}
 <html>
-    <body>
+    <body class="Results-page">
+        <div class="content">
+            <h1>Voting Results</h1>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-         <h2>Voting Results</h2>
          <canvas id="myChart" width="400" height="200"></canvas>
          <script>
                  var ctx = document.getElementById('myChart').getContext('2d');
@@ -43,6 +45,6 @@
 
              </script>
                       <! External file is not working for some reason - but js works !>
-         </body>
+        </body>
 </html>
 {% endblock %}

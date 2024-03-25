@@ -301,6 +301,11 @@ form#registration input, form#registration button {
     padding: 10px;
 }
 
+.Results-page .content h1 {
+  color: #333;
+  text-align: center;
+}
+
 
 .about-page .content h1 {
   color: #333;
