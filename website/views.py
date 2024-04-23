@@ -1,11 +1,20 @@
-from flask import Flask, Blueprint, flash, redirect, render_template, request, session, url_for
+import os
+import secrets
+
+from flask import (Blueprint, Flask, flash, redirect, render_template, request,
+                   session, url_for)
+
 from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
 from.models import Candidate, Voter, Vote, Message
-from website.models import db
-from website.encryption import *
-from datetime import datetime
+import secrets
 from collections import defaultdict
+from datetime import datetime
 
+import pyotp
+import qrcode
+
+from website.encryption import *
+from website.models import db
 
 app = Flask(__name__)
 
@@ -123,7 +132,13 @@ def login():
 
     return render_template("login.html")
 
-# register function with encryption. Needs testing
+
+
+
+# Function to generate secret key for Google Authenticator
+def generate_secret_key():
+    return pyotp.random_base32()
+
 @views.route('/register.html', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -134,31 +149,111 @@ def register():
         password = request.form['password']
         confirm = request.form['confirm']
 
+        # Store registration information in the session
+        session['registration_data'] = {
+            'name': name,
+            'address': address,
+            'dob': dob,
+            'username': username,
+            'password': password,
+            
+        }
+
         # Check if the email (Address) is already in use
         existing_voter = Voter.query.filter_by(Address=address).first()
         if existing_voter:
-            flash('Email is already in use. Please choose a different email.')
+            print('Email is already in use. Please choose a different email.')
             return redirect(url_for('views.register'))
 
-        #checking that the "password" and "confirm password" inputs match
-    #    if password != confirm:
-        #    return "Passwords do not match", 400
-        #Above is already done using javascript validationForm.js
+        # Generate secret key for Google Authenticator
+        secret_key = generate_secret_key()
+        print(secret_key)
+        session['secret_key'] = secret_key
 
-        #generating hash (see encryption.py for function)
-        hashed_password, salt = generate_password_hash(password)
+        totp_auth = pyotp.totp.TOTP( 
+            secret_key).provisioning_uri( 
+            name=username, 
+            issuer_name='E-Voting') 
 
-        #adding the newly registered user to the database
-        new_voter = Voter(Name=name, Address=address, DateOfBirth=dob,
-                          Username=username, PasswordHash=hashed_password, Salt=salt, IsActive=True)
+        # Define the folder where you want to save the QR code image
+        UPLOAD_FOLDER = 'website/static/qr_codes'
 
-        db.session.add(new_voter)
-        db.session.commit()
+        # Ensure the folder exists, create it if necessary
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
 
-    #    flash('Registration successful. You can now log in.')
-        return redirect(url_for('views.login'))
+        # Construct the filename for the QR code image based on the username
+        qr_filename = f"{username}_qr.png"
+
+        # Generate the QR code with the constructed filename
+        qr_path = os.path.join(UPLOAD_FOLDER, qr_filename)
+        qrcode.make(totp_auth).save(qr_path)
+
+        # Render registration page with QR code filename
+        return render_template('registerQR.html', qr_name=qr_filename)
 
     return render_template('register.html')
+
+
+@views.route('/verify_registration', methods=['GET', 'POST'])
+def verify_registration():
+    if request.method == 'POST':
+        user_entered_code = request.form['verification_code']
+        secret_key = session.get('secret_key')
+
+        if not secret_key:
+            flash('Secret key not found. Please register again.')
+            return redirect(url_for('views.register'))
+
+        # Retrieve registration data from the session
+        registration_data = session.get('registration_data')
+
+        if not registration_data:
+            flash('Registration data not found. Please register again.')
+            return redirect(url_for('views.register'))
+
+        name = registration_data['name']
+        address = registration_data['address']
+        dob = registration_data['dob']
+        username = registration_data['username']
+        password = registration_data['password']
+
+        # Verify the entered code
+        print(secret_key)
+        totp = pyotp.TOTP(secret_key)
+        if totp.verify(user_entered_code):
+            # Code is valid, proceed with registration
+            
+            # Generate password hash
+            hashed_password, salt = generate_password_hash(password)
+
+            # Add the newly registered user to the database
+            new_voter = Voter(
+                Name=name, Address=address, DateOfBirth=dob,
+                Username=username, PasswordHash=hashed_password, Salt=salt, IsActive=True
+            )
+
+            db.session.add(new_voter)
+            db.session.commit()
+
+             # Clear session data related to registration
+            session.pop('registration_data')
+            session.pop('secret_key')
+            
+            # Update session with user ID
+            session['user_id'] = new_voter.VoterID
+            
+            # Redirect to login page
+            return redirect(url_for('views.login'))
+        else:
+            print('Invalid verification code. Please try again.')
+            return redirect(url_for('views.register'))
+
+
+    return render_template('register.html')
+
+
+
 
 @views.route("/results.html")
 def results():
@@ -179,7 +274,7 @@ def results():
 def vote():
     if 'user_id' in session:
         candidate_list = Candidate.query.all()
-        return render_template("vote.html", user_authenticated=True, candidate_list=candidate_list)
+        return render_template("vote.html", user_authenticated=True, candidate_list=candidate_list) #This needs to pass the user not just of they are authenticated
     else:
         return render_template("vote.html", user_authenticated=False)
 
@@ -289,4 +384,5 @@ def internal_server_error(error):
 app.register_blueprint(views)
 
 if __name__ == '__main__':
+    app.run(debug=True)
     app.run(debug=True)

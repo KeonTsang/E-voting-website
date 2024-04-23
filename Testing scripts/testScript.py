@@ -1,15 +1,17 @@
-import requests
 import random
 from datetime import datetime, timedelta
-from website.models import db, Voter, Candidate
-from flask import render_template, request, redirect, url_for
 
+import requests
+from flask import redirect, render_template, request, url_for
 
+from website import views
+from website.forms import CandidateForm
+from website.models import Candidate, Voter, db
 
 #Need to add voting URL
 
-@views.route("/admin", methods=['GET', 'POST'])
-def admin():
+@views.route("/adminvote.html", methods=['GET', 'POST'])
+def adminvote():
     candidate_form = CandidateForm()
 
     candidates = Candidate.query.all()
@@ -67,7 +69,7 @@ def simulate_test_votes(num_votes):
         payload = {'VoterID': random_voter.VoterID, 'CandidateID': random_candidate.CandidateID}
 
         try:
-            response = requests.post(VOTING_URL, data=payload)
+            response = requests.post("/results.html", data=payload)
             if response.status_code == 200:
                 print(f"Vote successful for voter {random_voter.Username} to candidate {random_candidate.Name}")
             else:

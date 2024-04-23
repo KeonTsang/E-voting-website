@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    {% if qr_name %}
+    <div>
+        <h3>Scan the QR code below using the Google Authenticator app on your mobile device:</h3>
+        <img src="{{ url_for('static', filename='qr_codes/' + qr_name) }}" alt="QR Code" style="max-width: 100%;">
+    </div>
+    {% endif %}
+    
+    <form id="verificationForm" action="/verify_registration" method="post">
+        <label for="verification_code">Enter Verification Code:</label>
+        <input type="text" id="verification_code" name="verification_code" required>
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>
+{% endblock %}
+
+
+
