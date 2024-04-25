@@ -8,7 +8,8 @@
                 <input type="text" id="name" name="name" required><br>
 
                 <label for="address"> E-Mail </label>
-                <input type="text" id="address" name="address" required><br>
+                <input type="text" id="address" name="address" oninput="checkEmailAvailability(this.value)"required ><br>
+                <span id="email-tooltip" style="display: none; color: red;">Email is already in use. Please choose a different email.</span>
 
                 <label for="dob"> Date of birth </label>
                 <input type="date" id="dob" name="dob" required><br>
@@ -32,6 +33,9 @@
                 </div>
                 
             </form>
+
+            
+            
 
             
 

@@ -16,3 +16,19 @@ function validation() {
         return true;
     }
 }
+
+function checkEmailAvailability(email) {
+    // You may need to adjust this URL according to your Flask route
+    fetch(`/check_email_availability?email=${encodeURIComponent(email)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.exists) {
+                document.getElementById("email-tooltip").style.display = "inline"; // Show tooltip
+            } else {
+                document.getElementById("email-tooltip").style.display = "none"; // Hide tooltip
+            }
+        });
+}
+
+
+                

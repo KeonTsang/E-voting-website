@@ -1,6 +1,7 @@
 import os
 import secrets
 
+from flask import jsonify
 from flask import (Blueprint, Flask, flash, redirect, render_template, request,
                    session, url_for)
 
@@ -252,6 +253,21 @@ def verify_registration():
 
     return render_template('register.html')
 
+
+
+@views.route('/check_email_availability')
+def check_email_availability():
+    email = request.args.get('email')
+
+    if email:
+        existing_voter = Voter.query.filter_by(Address=email).first()
+        if existing_voter:
+            return jsonify({"exists": True})
+        else:
+            return jsonify({"exists": False})
+    else:
+        # Handle case where no email parameter is provided
+        return jsonify({"error": "No email provided"})
 
 
 
