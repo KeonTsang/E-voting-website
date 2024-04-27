@@ -14,7 +14,7 @@ import pyotp
 import qrcode
 
 from website.encryption import *
-from website.validatevote import validate
+from website.validatevote import validateEligibility
 from website.models import db
 
 app = Flask(__name__)
@@ -127,8 +127,6 @@ def login():
             session['user_id'] = voter.VoterID  # Store user ID in the session
             return redirect(url_for('views.vote'))
         else:
-            # If we create a 401 error page, replace the code below with the commented code
-            # flash("Invalid email or password. Please try again.", "error")
             return "Invalid username or password", 401
 
     return render_template("login.html")
@@ -231,7 +229,8 @@ def verify_registration():
             # Add the newly registered user to the database
             new_voter = Voter(
                 Name=name, Address=address, DateOfBirth=dob,
-                Username=username, PasswordHash=hashed_password, Salt=salt, IsActive=True
+                Username=username, PasswordHash=hashed_password, Salt=salt,
+                IsActive=True, VoteCast = False, Admin = False # these 3 are default values for every new voter
             )
 
             db.session.add(new_voter)
@@ -290,7 +289,7 @@ def results():
 def vote():
     if 'user_id' in session:
         candidate_list = Candidate.query.all()
-        return render_template("vote.html", user_authenticated=True, candidate_list=candidate_list) #This needs to pass the user not just of they are authenticated
+        return render_template("vote.html", user_authenticated=True, candidate_list=candidate_list) #This needs to pass the user not just if they are authenticated
     else:
         return render_template("vote.html", user_authenticated=False)
 
@@ -300,14 +299,20 @@ def submit_vote():
         voted_candidate_id = request.form.get('voted_candidate')
         voter_id = session['user_id']
 
-        # Check if the user has already voted
-        #existing_vote = Vote.query.filter_by(VoterID=voter_id).first()
-        #if existing_vote:
-        #    return "You have already voted.", 400
+        # vote eligibility check
+        ageVerified, voteCast = validateEligibility(voter_id)
+        if ageVerified == False:
+            return "Error: You must be 18 or older to cast a vote in this election.", 401
+        if voteCast == True:
+            return "Error: You have already voted in this election and may not vote again.", 401
+        
         if voted_candidate_id != "":
             print(voted_candidate_id)
         # Save the vote
-        vote = Vote(VoterID=voter_id, CandidateID=voted_candidate_id)
+        vote = Vote(CandidateID=voted_candidate_id)
+        # marking that the voter has voted in the "Voter" database
+        voter = Voter.query.get(voter_id)
+        voter.VoteCast = True
         db.session.add(vote)
         db.session.commit()
 

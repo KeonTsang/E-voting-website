@@ -2,30 +2,32 @@ from.models import Candidate, Voter, Vote, Message
 from website.models import db
 import datetime
 
-def validate(voter_id):
+def validateEligibility(voter_id):
     
     # this function verifies that the voter is eligible to cast a vote
-    # returns boolean value True if they can vote, and False if not
+    # returns boolean values ageVerified and voteCast so that the appropriate error message can be displayed to the user
 
     ageVerified = False # setting variables as their "can't vote" values by default
-    voteCast = True
+    voteCast = False
 
     # taking voter info from the DB using voterID
     voter = Voter.query.filter_by(VoterID=voter_id).first() # assumes authentication has already occured
 
     # age verification
     birthDate = voter.DateOfBirth
-    today = datetime.today()
+    today = datetime.date.today()
     age = today.year - birthDate.year - ((today.month, today.day) < (birthDate.month, birthDate.day))
     if age >= 18:
         ageVerified = True
 
-    # checking vote not already cast
+    # checking that a vote has not already been cast
 
-    if voter.VoteCast == False:
-        voteCast = False
+    if voter.VoteCast == True:
+        voteCast = True
 
-    if ageVerified == True and voteCast == False:
-        return True
+    if ageVerified == True or voteCast == False: # printing the outcome in terminal for debugging purposes
+        print("Voter eligibility confirmed")
     else:
-        return False
+        print("Voter failed eligibility check")
+
+    return ageVerified, voteCast
