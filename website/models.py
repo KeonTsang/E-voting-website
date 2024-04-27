@@ -10,6 +10,8 @@ class Voter(db.Model):
     PasswordHash = db.Column(db.String(255))
     Salt = db.Column(db.String(50))
     IsActive = db.Column(db.Boolean)
+    VoteCast = db.Column(db.Boolean)
+    Admin = db.Column(db.Boolean)
 
 # class Register(db.Model):       #creating register db. however haven't creating table into database
 #     __tablename__ = 'Register'
@@ -42,7 +44,6 @@ class Candidate(db.Model):
 class Vote(db.Model):
     __tablename__ = 'Vote'
     VoteID = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    VoterID = db.Column(db.Integer, db.ForeignKey('Voter.VoterID'))
     CandidateID = db.Column(db.Integer, db.ForeignKey('Candidate.CandidateID'))
 
 class AuditTrail(db.Model):
