@@ -1,5 +1,4 @@
 import os
-import secrets
 
 from flask import jsonify
 from flask import (Blueprint, Flask, flash, redirect, render_template, request,
@@ -15,6 +14,7 @@ import pyotp
 import qrcode
 
 from website.encryption import *
+from website.validatevote import validate
 from website.models import db
 
 app = Flask(__name__)
