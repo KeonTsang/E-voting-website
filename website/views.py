@@ -126,11 +126,12 @@ def login():
             # Authentication successful
             session['user_id'] = voter.VoterID  # Store user ID in the session
             session['logged_in'] = True
+            session['fullname'] = voter.Name
             if voter.Admin == True:
                 print("Admin privileges enabled")
                 session["admin"] = True
             else:
-                print("No admin privileges available on this account")
+                print("No admin privileges on this account")
                 session["admin"] = False
             return redirect(url_for('views.vote', noselection=False))
         else:
@@ -139,11 +140,19 @@ def login():
     return render_template("login.html")
 
 
-
-
 # Function to generate secret key for Google Authenticator
 def generate_secret_key():
     return pyotp.random_base32()
+
+@views.route("/logout", methods=['GET', 'POST'])
+def logout():
+    if request.method == 'GET':
+        print('good')
+        session['user_id'] = ""
+        session['logged_in'] = False
+        session['fullname'] = ""
+        session['admin'] = False
+        return redirect(url_for('views.login'))
 
 @views.route('/register.html', methods=['GET', 'POST'])
 def register():
