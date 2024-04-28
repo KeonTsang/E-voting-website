@@ -395,6 +395,13 @@ def Rishi():
         text = file.read()
     return render_template("Rishi.html", text=text)
 
+@views.route("/Liz.html")
+def Liz():
+    candidate = Candidate.query.first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Liz.html", text=text)
+
 @views.route("/admin.html", methods = ['GET', 'POST'])
 def admin():
     candidate_form = CandidateForm()
