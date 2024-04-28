@@ -125,7 +125,7 @@ def login():
         if voter and check_password(password, voter.PasswordHash, voter.Salt):
             # Authentication successful
             session['user_id'] = voter.VoterID  # Store user ID in the session
-            return redirect(url_for('views.vote'))
+            return redirect(url_for('views.vote', noselection=False))
         else:
             return "Invalid username or password", 401
 
@@ -285,11 +285,19 @@ def results():
     })
     return render_template("results.html", candidates=candidates)
 
-@views.route("/vote.html")
-def vote():
+@views.route("/vote.html/<noselection>") 
+# to redirect to this page, use return redirect(url_for('views.vote', noselection=False))
+
+# noselection is set to True when the user has been returned to the vote page because they did not select a
+# candidate when they pressed the vote button
+
+def vote(noselection): # beware!! noselection is a string, not a boolean
     if 'user_id' in session:
         candidate_list = Candidate.query.all()
-        return render_template("vote.html", user_authenticated=True, candidate_list=candidate_list) #This needs to pass the user not just if they are authenticated
+        if noselection == "True":
+            return render_template("vote.html", noselection=True, user_authenticated=True, candidate_list=candidate_list) #This needs to pass the user not just if they are authenticated
+        else:
+            return render_template("vote.html", noselection=False, user_authenticated=True, candidate_list=candidate_list) #This needs to pass the user not just if they are authenticated
     else:
         return render_template("vote.html", user_authenticated=False)
 
@@ -299,15 +307,20 @@ def submit_vote():
         voted_candidate_id = request.form.get('voted_candidate')
         voter_id = session['user_id']
 
+        if voted_candidate_id != "":
+            print(voted_candidate_id) # displays the candidate the user voted for the terminal, purely for debugging
+
+        if voted_candidate_id == None:
+            return redirect(url_for("views.vote", noselection = True))
+
         # vote eligibility check
         ageVerified, voteCast = validateEligibility(voter_id)
         if ageVerified == False:
             return "Error: You must be 18 or older to cast a vote in this election.", 401
         if voteCast == True:
             return "Error: You have already voted in this election and may not vote again.", 401
-        
-        if voted_candidate_id != "":
-            print(voted_candidate_id)
+
+
         # Save the vote
         vote = Vote(CandidateID=voted_candidate_id)
         # marking that the voter has voted in the "Voter" database

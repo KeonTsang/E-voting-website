@@ -4,6 +4,12 @@
     <body class="vote-page">
         <div class="content">
             <h1>Cast your vote</h1>
+            {% if noselection %}
+                <!-- if the page is redirected to because the user did not select a candidate before pressing vote-->
+                <p style="text-align: center; color: red;">Please select a candidate.</p>
+            {% else %}
+            <p></p>
+            {% endif %}
         </div>
 
         <div class="content">
