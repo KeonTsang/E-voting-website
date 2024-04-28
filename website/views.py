@@ -125,6 +125,13 @@ def login():
         if voter and check_password(password, voter.PasswordHash, voter.Salt):
             # Authentication successful
             session['user_id'] = voter.VoterID  # Store user ID in the session
+            session['logged_in'] = True
+            if voter.Admin == True:
+                print("Admin privileges enabled")
+                session["admin"] = True
+            else:
+                print("No admin privileges available on this account")
+                session["admin"] = False
             return redirect(url_for('views.vote', noselection=False))
         else:
             return "Invalid username or password", 401
