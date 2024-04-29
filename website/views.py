@@ -368,7 +368,7 @@ def vote_confirmation():
 
 @views.route("/Joe.html")
 def Joe():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Joe Biden").first()
 
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
@@ -376,28 +376,28 @@ def Joe():
 
 @views.route("/Boris.html")
 def Boris():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Boris Johnson").first()
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
     return render_template("Boris.html" , text=text)
 
 @views.route("/Donald.html")
 def Donald():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Donald Trump").first()
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
     return render_template("Donald.html",  text=text)
 
 @views.route("/Rishi.html")
 def Rishi():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Rishi Sunak").first()
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
     return render_template("Rishi.html", text=text)
 
 @views.route("/Liz.html")
 def Liz():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Liz Truss").first()
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
     return render_template("Liz.html", text=text)
