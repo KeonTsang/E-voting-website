@@ -73,29 +73,8 @@ def candidates():
         if (request.form['Name'] != None):
             c_NAME = request.form['Name']
 
-
-
-    #    Can_name = request.args.get("Can_name")
-    #    if (Can_name == None):
-
     return render_template("candidates.html", candidate=candidate)
 
-@views.route("/Candidate_Base.html", methods = ["POST" , "GET"])
-def Can_Page():
-    Can_name = request.args.get( "Can_name" )
-    if (Can_name == None):
-        return render_template("Proto1.html")
-
-    if (request.method == "POST" and "Name" in request.form):
-        if (request.form["Name"]!= None):
-            c_NAME = request.form["Name"]
-
-    Searched_Can = Candidate.query.filter_by(Name = Can_name).first()
-    if (Searched_Can == None):
-        return render_template("Proto1.html")
-
-    else :
-        return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL , Facebook = Searched_Can.FacebookLink , Insta = Searched_Can.InstagramLink , Wiki = Searched_Can.WikiLink , Twitter = Searched_Can.TwitterLink)
 
 @views.route("/contact.html", methods=['GET', 'POST'])
 def contact():
