@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<html>
     <body>
         <div class="content">
             <a href="https://en.wikipedia.org/wiki/Donald_Trump">
                 <img ID ="photo" src="../static/Images/DT.jpg" alt="photo Donald Trump" width="40%">
             </a>
-            <h2>Donald Trump:</h2><br>
+            <h2>Donald Trump:</h2>
+            <br>
             <p> {{text}}</p>
-            <br><br><A href="https://en.wikipedia.org/wiki/Donald_Trump" ><p>Source: https://en.wikipedia.org/wiki/Donald_Trump</p></A>
+            <br>
+            <br>
+            <A href="https://en.wikipedia.org/wiki/Donald_Trump" ><p>Source: https://en.wikipedia.org/wiki/Donald_Trump</p></A>
         </div>
     </body>
-</html>
 {% endblock %}
