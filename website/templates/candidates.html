@@ -1,35 +1,30 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<html>
-        <body>
-                <div class="cardTest">
-                <h1>Welcome to the Online Voting System </h1>
-                </div>
-            <div class="content">
+    <body>
+        <div class="cardTest">
+            <h1>Welcome to the Online Voting System </h1>
+        </div>
+        <div class="content">
 
-                        <p>You must sign in to continue to vote</p>
-                        <a href="login.html" class="login-button">Login</a>
-                    </div>
-                    <form method="POST">
-                            <div class="row">
-                                <a href=" {{CandidateID}}"></a>
-                                <div class="candidates">
-                                    {% for person in candidate %}
-                                        <div class="our-team">
-                                            <input type="hidden" id = "data" name="{{person}} , {{candidate[person]['Name']}} , {{candidate[person]['Constituency']}} ,{{candidate[person]['Party']}} , {{ candidate[person]['Party'] }} ">
-                                                <!-- <a href="/Candidate?Name={{person}}">
-                                                    <h2>Name: {{ candidate[person]['Name']}}</h2>
-                                                </a> -->
-                                                <h2>Name: {{ candidate[person]['Name']}}</h2>
-                                                <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p>
-                                                <p>Party: {{ candidate[person]['Party'] }}</p>
-                                                <p>Photo :</p> <img src="/{{ candidate[person]['IMG_URL'] }}" id="photo" alt="{{person}}" style="height: 300px; width: 250px;">
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                    </form>
+            <p>You must sign in to continue to vote</p>
+            <a href="login.html" class="login-button">Login</a>
+        </div>
+        <form method="POST">
+            <div class="row">
+                <a href=" {{CandidateID}}"></a>
+                <div class="candidates">
+                    {% for person in candidate %}
+                        <div class="our-team">
+                            <input type="hidden" id = "data" name="{{person}} , {{candidate[person]['Name']}} , {{candidate[person]['Constituency']}} ,{{candidate[person]['Party']}} , {{ candidate[person]['Party'] }} ">
+                            <h2>Name: {{ candidate[person]['Name']}}</h2>
+                            <p>Constituency: {{ candidate[person][ 'Constituency'] }}</p>
+                            <p>Party: {{ candidate[person]['Party'] }}</p>
+                            <p>Photo :</p> 
+                            <img src="/{{ candidate[person]['IMG_URL'] }}" id="photo" alt="{{person}}" style="height: 300px; width: 250px;">
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        </body>
-</html>
+        </form>
+    </body>
 {% endblock %}

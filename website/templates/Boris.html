@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<html>
-        <body>
-            <div class="content">
-                <a href="https://en.wikipedia.org/wiki/Boris_Johnson">
-                    <img ID ="photo" src="../static/Images/boris.jpg" alt="photo Boris Johnson" width="40%" height="auto">
-                </a>
-                <h2>Boris Johnson:</h2> <br>
-                    <p> {{text}}</p>
-                <br><br><A href="https://en.wikipedia.org/wiki/Boris_Johnson" ><p>Source: https://en.wikipedia.org/wiki/Boris_Johnson</p></A>
-                
-            </div>
-        </body>
-</html>
+    <body>
+        <div class="content">
+            <a href="https://en.wikipedia.org/wiki/Boris_Johnson">
+                <img ID ="photo" src="../static/Images/boris.jpg" alt="Boris Johnson" width="40%" height="auto">
+            </a>
+            <h2>Boris Johnson:</h2> <br>
+                <p> {{text}}</p>
+            <br><br><A href="https://en.wikipedia.org/wiki/Boris_Johnson" ><p>Source: https://en.wikipedia.org/wiki/Boris_Johnson</p></A>
+            
+        </div>
+    </body>
 {% endblock %}
