@@ -1,8 +1,7 @@
 import os
 
 from flask import jsonify
-from flask import (Blueprint, Flask, flash, redirect, render_template, request,
-                   session, url_for)
+from flask import (Blueprint, Flask, flash, redirect, render_template, request,session, url_for)
 
 from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
 from.models import Candidate, Voter, Vote, Message
@@ -20,10 +19,6 @@ from website.models import db
 app = Flask(__name__)
 
 views = Blueprint('views', __name__)
-
-#db = SQLAlchemy()
-
-#DB_NAME = "database.db"
 
 @views.route("/")
 def default():
@@ -44,7 +39,6 @@ def home():
             'instagram_url': candidate.InstagramLink,
             'wikipedia_url': candidate.WikiLink
         }
-        #candidate.update(candidate_info)    #dictionary of information so can use jinja
     return render_template("Proto1.html" , candidate = candidate)
 
 @views.route("/about.html")
@@ -231,7 +225,7 @@ def verify_registration():
             db.session.add(new_voter)
             db.session.commit()
 
-             # Clear session data related to registration
+            # Clear session data related to registration
             session.pop('registration_data')
             session.pop('secret_key')
             
@@ -393,13 +387,9 @@ def admin():
         if candidate is None:
 
             new_name = candidate_form.Name.data
-
             new_party = candidate_form.Party.data
-
             new_con = candidate_form.Constituency.data
-
             Candidate.AddCandidate(new_name, new_party, new_con)
-
             return redirect(url_for('views.admin'))
 
     return render_template("admin.html", candidate_form=candidate_form, candidates = candidates)
@@ -413,7 +403,6 @@ def page_not_found(error):
 @app.errorhandler(500)
 def internal_server_error(error):
     return render_template("500.html"), 500
-
 
 
 # Register the blueprint with the Flask app

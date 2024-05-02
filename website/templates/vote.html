@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<html lang="en">
     <body class="vote-page">
         <div class="content">
-            <h1>Cast your vote</h1>
+            <h1 >Cast your vote</h1>
             {% if noselection %}
                 <!-- if the page is redirected to because the user did not select a candidate before pressing vote-->
                 <p style="text-align: center; color: red;">Please select a candidate.</p>
@@ -22,7 +21,8 @@
                             <label>
                                 <input type="radio" name="voted_candidate" value="{{ candidate.CandidateID }}">
                                 {{ candidate.Name }} - {{ candidate.Party }}
-                            </label><br>
+                            </label>
+                            <br>
                         {% endfor %}
                         <br>
                         <input type="submit" value="Cast Vote" class="login-button">
@@ -33,6 +33,5 @@
                 {% endif %}
             </div>
         </div>
-    </body>
-</html>
+</body>
 {% endblock %}
