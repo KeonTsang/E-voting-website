@@ -1,45 +1,36 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<html>
     <script type="text/javascript" src=../static/javascript/validationForm.js></script>
-        <body>
-            <form id=registration onsubmit='return validation()' action="/register.html" method="post">
-                <label for="name"> Full Name </label>
-                <input type="text" id="name" name="name" required><br>
+    <body>
+        <form id=registration onsubmit='return validation()' action="/register.html" method="post">
+            <label for="name"> Full Name </label>
+            <input type="text" id="name" name="name" required><br>
 
-                <label for="address"> E-Mail </label>
-                <input type="text" id="address" name="address" oninput="checkEmailAvailability(this.value)"required ><br>
-                <span id="email-tooltip" style="display: none; color: red;">Email is already in use. Please choose a different email.</span>
+            <label for="address"> E-Mail </label>
+            <input type="text" id="address" name="address" oninput="checkEmailAvailability(this.value)"required ><br>
+            <span id="email-tooltip" style="display: none; color: red;">Email is already in use. Please choose a different email.</span>
 
-                <label for="dob"> Date of birth </label>
-                <input type="date" id="dob" name="dob" required><br>
+            <label for="dob"> Date of birth </label>
+            <input type="date" id="dob" name="dob" required><br>
 
-                <label for="username"> Username </label>
-                <input type="text" id="username" name="username" required><br><br>
+            <label for="username"> Username </label>
+            <input type="text" id="username" name="username" required><br><br>
 
-                <label for="password"> Password </label>
-                <input type="password" id="password" name="password" required><br>
+            <label for="password"> Password </label>
+            <input type="password" id="password" name="password" required><br>
 
-                <label for="confirm"> Confirm password </label>
-                <input type="password" id="confirm" name="confirm" required><br>
+            <label for="confirm"> Confirm password </label>
+            <input type="password" id="confirm" name="confirm" required><br>
 
-                <span id="passwordError" style="color: red;"></span>
+            <span id="passwordError" style="color: red;"></span>
 
 
-                <div id="submit-container">
-                    <span id="passwordErrorPlaceholder" style="color: red; visibility: hidden;"></span>
-                    <span id="passwordError" style="color: red;"> </span>
-                    <button type="submit">Register</button>
-                </div>
-                
-            </form>
-
+            <div id="submit-container">
+                <span id="passwordErrorPlaceholder" style="color: red; visibility: hidden;"></span>
+                <span id="passwordError" style="color: red;"> </span>
+                <button type="submit">Register</button>
+            </div>
             
-            
-
-            
-
-
-        </body>
-</html>
+        </form>
+    </body>
 {% endblock %}
