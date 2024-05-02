@@ -133,6 +133,7 @@ def register():
         name = request.form['name']
         address = request.form['address']
         dob = datetime.strptime(request.form['dob'], '%Y-%m-%d')
+        ni = request.form['NI']
         username = request.form['username']
         password = request.form['password']
         confirm = request.form['confirm']
@@ -142,6 +143,7 @@ def register():
             'name': name,
             'address': address,
             'dob': dob,
+            'ni': ni,
             'username': username,
             'password': password,
             
@@ -204,6 +206,7 @@ def verify_registration():
         address = registration_data['address']
         dob = registration_data['dob']
         username = registration_data['username']
+        ni = registration_data['ni']
         password = registration_data['password']
 
         # Verify the entered code
@@ -215,11 +218,15 @@ def verify_registration():
             # Generate password hash
             hashed_password, salt = generate_password_hash(password)
 
+            # Generating NI number hash
+            niHash, niSalt = generate_password_hash(ni)
+
             # Add the newly registered user to the database
             new_voter = Voter(
                 Name=name, Address=address, DateOfBirth=dob,
                 Username=username, PasswordHash=hashed_password, Salt=salt,
-                IsActive=True, VoteCast = False, Admin = False # these 3 are default values for every new voter
+                IsActive=True, VoteCast = False, Admin = False, # these 3 are default values for every new voter
+                NIHash=niHash, NISalt=niSalt
             )
 
             db.session.add(new_voter)

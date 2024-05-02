@@ -12,6 +12,8 @@ class Voter(db.Model):
     IsActive = db.Column(db.Boolean)
     VoteCast = db.Column(db.Boolean)
     Admin = db.Column(db.Boolean)
+    NIHash = db.Column(db.String(255))
+    NISalt = db.Column(db.String(255))
 
 
 class Candidate(db.Model):
