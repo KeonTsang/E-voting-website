@@ -224,7 +224,7 @@ def verify_registration():
             new_voter = Voter(
                 Name=name, Address=address, DateOfBirth=dob,
                 Username=username, PasswordHash=hashed_password, Salt=salt,
-                IsActive=True, VoteCast = False, Admin = False # these 3 are default values for every new voter
+                IsActive=True, VoteCast = False, Admin = False, # these 3 are default values for every new voter
                 NIHash=niHash, NISalt=niSalt,
             )
 
