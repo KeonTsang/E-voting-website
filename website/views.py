@@ -1,5 +1,5 @@
 import os
-
+from flask import current_app
 from flask import jsonify
 from flask import (Blueprint, Flask, flash, redirect, render_template, request,
                    session, url_for)
@@ -9,9 +9,13 @@ from.models import Candidate, Voter, Vote, Message
 import secrets
 from collections import defaultdict
 from datetime import datetime
+from datetime import datetime, timedelta
+
 
 import pyotp
 import qrcode
+import concurrent.futures
+import random
 
 from website.encryption import *
 from website.validatevote import validateEligibility
@@ -124,7 +128,7 @@ def login():
         voter = Voter.query.filter_by(Username=username).first()
         if voter and check_password(password, voter.PasswordHash, voter.Salt):
             # Authentication successful
-            session['user_id'] = voter.VoterID  # Store user ID in the session
+            session['user_id'] = voter.VoterID  # Stores user ID in the session
             session['logged_in'] = True
             if voter.Admin == True:
                 print("Admin privileges enabled")
@@ -141,7 +145,7 @@ def login():
 
 
 
-# Function to generate secret key for Google Authenticator
+#generate secret key for Google Authenticator
 def generate_secret_key():
     return pyotp.random_base32()
 
@@ -173,7 +177,6 @@ def register():
 
         # Generate secret key for Google Authenticator
         secret_key = generate_secret_key()
-        print(secret_key)
         session['secret_key'] = secret_key
 
         totp_auth = pyotp.totp.TOTP( 
@@ -181,17 +184,15 @@ def register():
             name=username, 
             issuer_name='E-Voting') 
 
-        # Define the folder where you want to save the QR code image
         UPLOAD_FOLDER = 'website/static/qr_codes'
 
-        # Ensure the folder exists, create it if necessary
         if not os.path.exists(UPLOAD_FOLDER):
             os.makedirs(UPLOAD_FOLDER)
 
         # Construct the filename for the QR code image based on the username
         qr_filename = f"{username}_qr.png"
 
-        # Generate the QR code with the constructed filename
+        # Generate the QR code with filename
         qr_path = os.path.join(UPLOAD_FOLDER, qr_filename)
         qrcode.make(totp_auth).save(qr_path)
 
@@ -225,12 +226,10 @@ def verify_registration():
         password = registration_data['password']
 
         # Verify the entered code
-        print(secret_key)
         totp = pyotp.TOTP(secret_key)
         if totp.verify(user_entered_code):
             # Code is valid, proceed with registration
             
-            # Generate password hash
             hashed_password, salt = generate_password_hash(password)
 
             # Add the newly registered user to the database
@@ -421,7 +420,12 @@ def internal_server_error(error):
 
 
 
-# Register the blueprint with the Flask app
+
+
+#test scale 
+
+
+
 app.register_blueprint(views)
 
 if __name__ == '__main__':
