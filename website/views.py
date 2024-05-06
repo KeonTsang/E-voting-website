@@ -117,13 +117,7 @@ def login():
     return render_template("login.html")
 
 
-<<<<<<< HEAD
-
-
-#generate secret key for Google Authenticator
-=======
 # Function to generate secret key for Google Authenticator
->>>>>>> 1cd256d64d17283459736076fc43edc1b1723183
 def generate_secret_key():
     return pyotp.random_base32()
 
@@ -416,17 +410,7 @@ def internal_server_error(error):
     return render_template("500.html"), 500
 
 
-<<<<<<< HEAD
-
-
-
-#test scale 
-
-
-
-=======
 # Register the blueprint with the Flask app
->>>>>>> 1cd256d64d17283459736076fc43edc1b1723183
 app.register_blueprint(views)
 
 if __name__ == '__main__':
