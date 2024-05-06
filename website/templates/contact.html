@@ -1,26 +1,24 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<html>
     <body class="contact-page">
-            <div class="content">
-                <h1>Contact us</h1>
-                    <form action="{{ url_for('views.contact') }}" method="post">
-                        <label for="fname"> First name:</label><br>
-                        <input type="text" id="fname" name="fname"><br>
-                        <label for="lname">Last Name:</label><br>
-                        <input type="text" id="lname" name="lname"><br>
-                        <label for="email">Email:</label><br>
-                        <input type="text" id="email" name="email"><br>
-                        <label for="message">Add your message below</label><br>
-                        <textarea id="message" name ="message" rows="4" cols="50"></textarea><br>
-                        <input type="submit" value="Submit">
-                    </form>
-                    <br>
-                <h3>Or use the following :</h3>
-                    <p>Email : hcenquiries@parliament.uk</p>
-                    <p>Phone number : 0800 112 4272</p>
-                    <p> Post : Houses of Parliament, St Margaret St,London SW1A 0AA</p>
-            </div>
+        <div class="content">
+            <h1>Contact us</h1>
+            <form action="{{ url_for('views.contact') }}" method="post">
+                <label for="fname"> First name:</label><br>
+                <input type="text" id="fname" name="fname"><br>
+                <label for="lname">Last Name:</label><br>
+                <input type="text" id="lname" name="lname"><br>
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email"><br>
+                <label for="message">Add your message below</label><br>
+                <textarea id="message" name ="message" rows="4" cols="50"></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
+            <br>
+            <h3>Or use the following :</h3>
+                <p>Email : hcenquiries@parliament.uk</p>
+                <p>Phone number : 0800 112 4272</p>
+                <p> Post : Houses of Parliament, St Margaret St,London SW1A 0AA</p>
+        </div>
     </body>
-</html>
 {% endblock %}

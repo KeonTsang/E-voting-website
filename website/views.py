@@ -1,8 +1,7 @@
 import os
 from flask import current_app
 from flask import jsonify
-from flask import (Blueprint, Flask, flash, redirect, render_template, request,
-                   session, url_for)
+from flask import (Blueprint, Flask, flash, redirect, render_template, request,session, url_for)
 
 from.forms import CandidateForm         #modified next 2 lines from "from.forms" and "from.models", "website."- removed the "." as wouldnt run
 from.models import Candidate, Voter, Vote, Message
@@ -25,10 +24,6 @@ app = Flask(__name__)
 
 views = Blueprint('views', __name__)
 
-#db = SQLAlchemy()
-
-#DB_NAME = "database.db"
-
 @views.route("/")
 def default():
     return render_template("Proto1.html")
@@ -48,7 +43,6 @@ def home():
             'instagram_url': candidate.InstagramLink,
             'wikipedia_url': candidate.WikiLink
         }
-        #candidate.update(candidate_info)    #dictionary of information so can use jinja
     return render_template("Proto1.html" , candidate = candidate)
 
 @views.route("/about.html")
@@ -77,29 +71,8 @@ def candidates():
         if (request.form['Name'] != None):
             c_NAME = request.form['Name']
 
-
-
-    #    Can_name = request.args.get("Can_name")
-    #    if (Can_name == None):
-
     return render_template("candidates.html", candidate=candidate)
 
-@views.route("/Candidate_Base.html", methods = ["POST" , "GET"])
-def Can_Page():
-    Can_name = request.args.get( "Can_name" )
-    if (Can_name == None):
-        return render_template("Proto1.html")
-
-    if (request.method == "POST" and "Name" in request.form):
-        if (request.form["Name"]!= None):
-            c_NAME = request.form["Name"]
-
-    Searched_Can = Candidate.query.filter_by(Name = Can_name).first()
-    if (Searched_Can == None):
-        return render_template("Proto1.html")
-
-    else :
-        return render_template( "Candidate_Base.html" , Name=Can_name , Party = Searched_Can.Party, Constituency = Searched_Can.Constituency , Image = Searched_Can.IMG_URL , Facebook = Searched_Can.FacebookLink , Insta = Searched_Can.InstagramLink , Wiki = Searched_Can.WikiLink , Twitter = Searched_Can.TwitterLink)
 
 @views.route("/contact.html", methods=['GET', 'POST'])
 def contact():
@@ -130,11 +103,12 @@ def login():
             # Authentication successful
             session['user_id'] = voter.VoterID  # Stores user ID in the session
             session['logged_in'] = True
+            session['fullname'] = voter.Name
             if voter.Admin == True:
                 print("Admin privileges enabled")
                 session["admin"] = True
             else:
-                print("No admin privileges available on this account")
+                print("No admin privileges on this account")
                 session["admin"] = False
             return redirect(url_for('views.vote', noselection=False))
         else:
@@ -143,11 +117,25 @@ def login():
     return render_template("login.html")
 
 
+<<<<<<< HEAD
 
 
 #generate secret key for Google Authenticator
+=======
+# Function to generate secret key for Google Authenticator
+>>>>>>> 1cd256d64d17283459736076fc43edc1b1723183
 def generate_secret_key():
     return pyotp.random_base32()
+
+@views.route("/logout", methods=['GET', 'POST'])
+def logout():
+    if request.method == 'GET':
+        print('good')
+        session['user_id'] = ""
+        session['logged_in'] = False
+        session['fullname'] = ""
+        session['admin'] = False
+        return redirect(url_for('views.login'))
 
 @views.route('/register.html', methods=['GET', 'POST'])
 def register():
@@ -155,6 +143,7 @@ def register():
         name = request.form['name']
         address = request.form['address']
         dob = datetime.strptime(request.form['dob'], '%Y-%m-%d')
+        ni = request.form['NI']
         username = request.form['username']
         password = request.form['password']
         confirm = request.form['confirm']
@@ -164,6 +153,7 @@ def register():
             'name': name,
             'address': address,
             'dob': dob,
+            'ni': ni,
             'username': username,
             'password': password,
             
@@ -222,6 +212,7 @@ def verify_registration():
         name = registration_data['name']
         address = registration_data['address']
         dob = registration_data['dob']
+        ni = registration_data['ni']
         username = registration_data['username']
         password = registration_data['password']
 
@@ -231,18 +222,21 @@ def verify_registration():
             # Code is valid, proceed with registration
             
             hashed_password, salt = generate_password_hash(password)
+            # Generating NI number hash
+            niHash, niSalt = generate_password_hash(ni)
 
             # Add the newly registered user to the database
             new_voter = Voter(
                 Name=name, Address=address, DateOfBirth=dob,
                 Username=username, PasswordHash=hashed_password, Salt=salt,
-                IsActive=True, VoteCast = False, Admin = False # these 3 are default values for every new voter
+                IsActive=True, VoteCast = False, Admin = False, # these 3 are default values for every new voter
+                NIHash=niHash, NISalt=niSalt,
             )
 
             db.session.add(new_voter)
             db.session.commit()
 
-             # Clear session data related to registration
+            # Clear session data related to registration
             session.pop('registration_data')
             session.pop('secret_key')
             
@@ -358,7 +352,7 @@ def vote_confirmation():
 
 @views.route("/Joe.html")
 def Joe():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Joe Biden").first()
 
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
@@ -366,24 +360,31 @@ def Joe():
 
 @views.route("/Boris.html")
 def Boris():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Boris Johnson").first()
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
     return render_template("Boris.html" , text=text)
 
 @views.route("/Donald.html")
 def Donald():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Donald Trump").first()
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
     return render_template("Donald.html",  text=text)
 
 @views.route("/Rishi.html")
 def Rishi():
-    candidate = Candidate.query.first()
+    candidate = Candidate.query.filter_by(Name="Rishi Sunak").first()
     with open(candidate.descriptionLink, 'r') as file:
         text = file.read()
     return render_template("Rishi.html", text=text)
+
+@views.route("/Liz.html")
+def Liz():
+    candidate = Candidate.query.filter_by(Name="Liz Truss").first()
+    with open(candidate.descriptionLink, 'r') as file:
+        text = file.read()
+    return render_template("Liz.html", text=text)
 
 @views.route("/admin.html", methods = ['GET', 'POST'])
 def admin():
@@ -397,13 +398,9 @@ def admin():
         if candidate is None:
 
             new_name = candidate_form.Name.data
-
             new_party = candidate_form.Party.data
-
             new_con = candidate_form.Constituency.data
-
             Candidate.AddCandidate(new_name, new_party, new_con)
-
             return redirect(url_for('views.admin'))
 
     return render_template("admin.html", candidate_form=candidate_form, candidates = candidates)
@@ -419,6 +416,7 @@ def internal_server_error(error):
     return render_template("500.html"), 500
 
 
+<<<<<<< HEAD
 
 
 
@@ -426,6 +424,9 @@ def internal_server_error(error):
 
 
 
+=======
+# Register the blueprint with the Flask app
+>>>>>>> 1cd256d64d17283459736076fc43edc1b1723183
 app.register_blueprint(views)
 
 if __name__ == '__main__':

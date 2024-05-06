@@ -1,50 +1,46 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<html>
     <body class="Results-page">
         <div class="content">
             <h1>Voting Results</h1>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-         <canvas id="myChart" width="400" height="200"></canvas>
-         <script>
-                 var ctx = document.getElementById('myChart').getContext('2d');
+        <canvas id="myChart" width="400" height="200"></canvas>
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
 
+            //get vote data from flas
+            var candidatesData = JSON.parse('{{ candidates | tojson | safe }}');
+            var votesData = candidatesData.map(candidate => candidate.votes);
 
-                 //get vote data from flas
-                 var candidatesData = JSON.parse('{{ candidates | tojson | safe }}');
-                 var votesData = candidatesData.map(candidate => candidate.votes);
+            // step size for interval on y axis
+            var maxVotes = Math.max(...votesData);
+            var stepSize = Math.ceil(maxVotes / 5);
 
-                 // step size for interval on y axis
-                 var maxVotes = Math.max(...votesData);
-                 var stepSize = Math.ceil(maxVotes / 5);
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: candidatesData.map(candidate => candidate.name),
+                    datasets: [{
+                        label: 'Votes',
+                        data: votesData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: stepSize
+                            }
+                        }
+                    }
+                }
+            });
 
-                 var myChart = new Chart(ctx, {
-                     type: 'bar',
-                     data: {
-                         labels: candidatesData.map(candidate => candidate.name),
-                         datasets: [{
-                             label: 'Votes',
-                             data: votesData,
-                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                             borderColor: 'rgba(54, 162, 235, 1)',
-                             borderWidth: 1
-                         }]
-                     },
-                     options: {
-                         scales: {
-                             y: {
-                                 beginAtZero: true,
-                                 ticks: {
-                                     stepSize: stepSize
-                                 }
-                             }
-                         }
-                     }
-                 });
-
-             </script>
-                      <! External file is not working for some reason - but js works !>
-        </body>
-</html>
+        </script>
+    </body>
 {% endblock %}

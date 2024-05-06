@@ -11,14 +11,9 @@ class Voter(db.Model):
     Salt = db.Column(db.String(50))
     IsActive = db.Column(db.Boolean)
     VoteCast = db.Column(db.Boolean)
-    Admin = db.Column(db.Boolean)
-
-# class Register(db.Model):       #creating register db. however haven't creating table into database
-#     __tablename__ = 'Register'
-#     Email = db.Column(db.String(255), primary_key=True, autoincrement=True)
-#     Password = db.Column(db.String(255))
-#     Username = db.Column(db.String(50))
-
+    Admin = db.Column(db.Boolean)    
+    NIHash = db.Column(db.String(255))
+    NISalt = db.Column(db.String(255))
 
 
 class Candidate(db.Model):
