@@ -1,16 +1,13 @@
-python == 3.10.11
 flask
 website
-os
+base
 flask_bootstrap
 flask_sqlalchemy
-forms
-models
-collections
+doqu
 datetime
 pyotp
 qrcode
 wtforms
 bcrypt
-random
 requests
+flask_wtf
