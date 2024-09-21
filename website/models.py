@@ -11,7 +11,7 @@ class Voter(db.Model):
     Salt = db.Column(db.String(50))
     IsActive = db.Column(db.Boolean)
     VoteCast = db.Column(db.Boolean)
-    Admin = db.Column(db.Boolean)
+    Admin = db.Column(db.Boolean)    
     NIHash = db.Column(db.String(255))
     NISalt = db.Column(db.String(255))
 

@@ -1,0 +1,26 @@
+<!-- adminvote.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Vote</title>
+</head>
+<body>
+    <h1>Admin Vote</h1>
+    <form method="POST" action="{{ url_for('views.adminvote') }}">
+        <input type="submit" name="run_testing_script" value="Run Testing Script">
+    </form>
+    <hr>
+    {% if reg_results %}
+    <h2>Voter Registration Results:</h2>
+    <p>{{ reg_results }}</p>
+    {% endif %}
+    <hr>
+    {% if vote_results %}
+    <h2>Test Voting Results:</h2>
+    <p>{{ vote_results }}</p>
+    {% endif %}
+</body>
+</html>

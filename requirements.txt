@@ -1,0 +1,13 @@
+flask
+website
+base
+flask_bootstrap
+flask_sqlalchemy
+doqu
+datetime
+pyotp
+qrcode
+wtforms
+bcrypt
+requests
+flask_wtf

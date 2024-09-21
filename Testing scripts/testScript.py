@@ -50,12 +50,8 @@ def simulate_voter_registration(num_fake_voters):
     for _ in range(num_fake_voters):
         name, address, dob, username, password = generate_fake_voter()
 
-        voter = Voter(Name=name, Address=address, DateOfBirth=dob,
-                      Username=username, PasswordHash=password, IsActive=True)
+        voter = Voter(Name=name, Address=address, DateOfBirth=dob,Username=username, PasswordHash=password, IsActive=True)
 
-        # NEED TO KEEP FAKE VOTERS SEPERATE AND DELETED AFTER TO AVOID BUILD UP OF USERS 
-        #db.session.add(voter) 
-        #db.session.commit()
 
 # Function to simulate casting test votes
 def simulate_test_votes(num_votes):
@@ -73,10 +69,6 @@ def simulate_test_votes(num_votes):
             if response.status_code == 200:
                 print(f"Vote successful for voter {random_voter.Username} to candidate {random_candidate.Name}")
             else:
-                print(f"Failed to vote for voter {random_voter.Username} to candidate {random_candidate.Name}, "
-                      f"Status Code: {response.status_code}")
+                print(f"Failed to vote for voter {random_voter.Username} to candidate {random_candidate.Name}, "f"Status Code: {response.status_code}")
         except Exception as e:
             print(f"Error voting for voter {random_voter.Username} to candidate {random_candidate.Name}, Exception: {e}")
-
-
-    
